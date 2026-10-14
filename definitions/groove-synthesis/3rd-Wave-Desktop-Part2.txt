@@ -1,0 +1,371 @@
+# Groove Synthesis 3rd Wave 24M Desktop - Part 2 NRPN
+# Definition revision 0.1.0 - researched 2026-10-14
+# Target HapaxOS 3.22 and 3rd Wave OS 2.0d, released 2026-10-13.
+# Source-reviewed and statically checked; hardware verification pending.
+# MIDI Spec v2.0, 2026-09-10: https://docs.google.com/document/d/1s2u8hfVNfOSYvnMlD52nWcRQJ5-0IUAyDC80ESRla78/edit
+# Release notes: https://groovesynthesis.com/firmware/readme_2_0d.txt
+# Setup and source errata: definitions/groove-synthesis/README.md
+# No arbitrary patch defaults are declared.
+# Requires MIDI include part in NRPN ON. Multi addresses use offset 1000.
+# Set MIDI Param Receive to NRPN. All data uses both CC6 and CC38 bytes.
+# A small raw range does not mean that 7-bit NRPN transmission is correct.
+# Use a matching part MIDI channel for notes in MIDI multitimbral mode.
+# Single-category unison and hold parameters use their explicit part addresses.
+# Excludes name characters, global settings, sequence data and unused FX slots.
+
+VERSION 1
+TRACKNAME 3W24M Part2
+TYPE POLY
+OUTPORT NULL
+OUTCHAN NULL
+INPORT NULL
+INCHAN NULL
+MAXRATE 12
+
+[DRUMLANES]
+[/DRUMLANES]
+
+# Named programs omitted until the bank-range discrepancy is hardware-checked.
+[PC]
+[/PC]
+
+[CC]
+1 Mod Wheel
+2 Breath
+64 Sustain Pedal
+[/CC]
+
+[CC_PAIR]
+[/CC_PAIR]
+
+[NRPN]
+8:46:14 Arp On # base 70; raw 0-1
+8:47:14 Arp Mode # base 71; raw 0-4
+8:48:14 Arp Octaves # base 72; raw 0-2
+8:49:14 Arp Division # base 73; raw 0-12
+8:78:14 Osc1 Wave Select # base 102; type*128 + index; see README
+8:79:14 Osc2 Wave Select # base 103; type*128 + index; see README
+8:80:14 Osc3 Wave Select # base 104; type*128 + index; see README
+8:81:14 Osc1 Wave Pos # base 105; raw 0-63
+8:82:14 Osc2 Wave Pos # base 106; raw 0-63
+8:83:14 Osc3 Wave Pos # base 107; raw 0-63
+8:84:14 Osc1 Note Reset # base 108; raw 0-1
+8:85:14 Osc2 Note Reset # base 109; raw 0-1
+8:86:14 Osc3 Note Reset # base 110; raw 0-1
+8:87:14 SVF Bandpass # base 111; raw 0-1
+8:88:14 LPF Res Comp # base 112; raw 0-1
+8:89:14 Filter Delay # base 113; raw 0-127
+8:90:14 Amp Delay # base 114; raw 0-127
+8:91:14 Env3 Delay # base 115; raw 0-127
+8:92:14 Env4 Delay # base 116; raw 0-127
+8:93:14 Filter Attack # base 117; raw 0-127
+8:94:14 Amp Attack # base 118; raw 0-127
+8:95:14 Env3 Attack # base 119; raw 0-127
+8:96:14 Env4 Attack # base 120; raw 0-127
+8:97:14 Filter Decay # base 121; raw 0-127
+8:98:14 Amp Decay # base 122; raw 0-127
+8:99:14 Env3 Decay # base 123; raw 0-127
+8:100:14 Env4 Decay # base 124; raw 0-127
+8:101:14 Filter Release # base 125; raw 0-127
+8:102:14 Amp Release # base 126; raw 0-127
+8:103:14 Env3 Release # base 127; raw 0-127
+8:104:14 Env4 Release # base 128; raw 0-127
+8:105:14 Filter Amount # base 129; raw 0-254; 127 is zero
+8:106:14 Amp Amount # base 130; raw 0-254; 127 is zero
+8:107:14 Env3 Amount # base 131; raw 0-254; 127 is zero
+8:108:14 Env4 Amount # base 132; raw 0-254; 127 is zero
+8:109:14 SVF Env Amt # base 133; raw 0-254; 127 is zero
+8:110:14 WEnv1 Time1 # base 134; raw 0-127
+8:111:14 WEnv2 Time1 # base 135; raw 0-127
+8:112:14 WEnv3 Time1 # base 136; raw 0-127
+8:113:14 WEnv1 Time2 # base 137; raw 0-127
+8:114:14 WEnv2 Time2 # base 138; raw 0-127
+8:115:14 WEnv3 Time2 # base 139; raw 0-127
+8:116:14 WEnv1 Time3 # base 140; raw 0-127
+8:117:14 WEnv2 Time3 # base 141; raw 0-127
+8:118:14 WEnv3 Time3 # base 142; raw 0-127
+8:119:14 WEnv1 Time4 # base 143; raw 0-127
+8:120:14 WEnv2 Time4 # base 144; raw 0-127
+8:121:14 WEnv3 Time4 # base 145; raw 0-127
+8:122:14 WEnv1 Time5 # base 146; raw 0-127
+8:123:14 WEnv2 Time5 # base 147; raw 0-127
+8:124:14 WEnv3 Time5 # base 148; raw 0-127
+8:125:14 WEnv1 Time6 # base 149; raw 0-127
+8:126:14 WEnv2 Time6 # base 150; raw 0-127
+8:127:14 WEnv3 Time6 # base 151; raw 0-127
+9:0:14 WEnv1 Rel Point # base 152; raw 1-6
+9:1:14 WEnv2 Rel Point # base 153; raw 1-6
+9:2:14 WEnv3 Rel Point # base 154; raw 1-6
+9:3:14 WEnv1 Loop Start # base 155; raw 1-6
+9:4:14 WEnv2 Loop Start # base 156; raw 1-6
+9:5:14 WEnv3 Loop Start # base 157; raw 1-6
+9:6:14 Wave Smooth # base 158; raw 0-1
+9:7:14 Wave Env On # base 159; raw 0-1
+9:8:14 Env Shape # base 160; raw 0-1
+9:9:14 LFO1 Rate # base 161; raw 0-255
+9:10:14 LFO2 Rate # base 162; raw 0-255
+9:11:14 LFO3 Rate # base 163; raw 0-255
+9:12:14 LFO4 Rate # base 164; raw 0-255
+9:13:14 LFO1 Division # base 165; raw 0-16
+9:14:14 LFO2 Division # base 166; raw 0-16
+9:15:14 LFO3 Division # base 167; raw 0-16
+9:16:14 LFO4 Division # base 168; raw 0-16
+9:17:14 LFO1 Shape # base 169; raw 0-8
+9:18:14 LFO2 Shape # base 170; raw 0-8
+9:19:14 LFO3 Shape # base 171; raw 0-8
+9:20:14 LFO4 Shape # base 172; raw 0-8
+9:21:14 LFO1 Sync # base 173; raw 0-1
+9:22:14 LFO2 Sync # base 174; raw 0-1
+9:23:14 LFO3 Sync # base 175; raw 0-1
+9:24:14 LFO4 Sync # base 176; raw 0-1
+9:25:14 LFO1 Reset # base 177; raw 0-1; table omits newer mode encodings
+9:26:14 LFO2 Reset # base 178; raw 0-1; table omits newer mode encodings
+9:27:14 LFO3 Reset # base 179; raw 0-1; table omits newer mode encodings
+9:28:14 LFO4 Reset # base 180; raw 0-1; table omits newer mode encodings
+9:29:14 Mod01 Source # base 181; raw 0-26; source list extends to 29 - see README
+9:30:14 Mod02 Source # base 182; raw 0-26; source list extends to 29 - see README
+9:31:14 Mod03 Source # base 183; raw 0-26; source list extends to 29 - see README
+9:32:14 Mod04 Source # base 184; raw 0-26; source list extends to 29 - see README
+9:33:14 Mod05 Source # base 185; raw 0-26; source list extends to 29 - see README
+9:34:14 Mod06 Source # base 186; raw 0-26; source list extends to 29 - see README
+9:35:14 Mod07 Source # base 187; raw 0-26; source list extends to 29 - see README
+9:36:14 Mod08 Source # base 188; raw 0-26; source list extends to 29 - see README
+9:37:14 Mod09 Source # base 189; raw 0-26; source list extends to 29 - see README
+9:38:14 Mod10 Source # base 190; raw 0-26; source list extends to 29 - see README
+9:39:14 Mod11 Source # base 191; raw 0-26; source list extends to 29 - see README
+9:40:14 Mod12 Source # base 192; raw 0-26; source list extends to 29 - see README
+9:41:14 Mod13 Source # base 193; raw 0-26; source list extends to 29 - see README
+9:42:14 Mod14 Source # base 194; raw 0-26; source list extends to 29 - see README
+9:43:14 Mod15 Source # base 195; raw 0-26; source list extends to 29 - see README
+9:44:14 Mod16 Source # base 196; raw 0-26; source list extends to 29 - see README
+9:45:14 Mod01 Dest # base 197; raw 0-126
+9:46:14 Mod02 Dest # base 198; raw 0-126
+9:47:14 Mod03 Dest # base 199; raw 0-126
+9:48:14 Mod04 Dest # base 200; raw 0-126
+9:49:14 Mod05 Dest # base 201; raw 0-126
+9:50:14 Mod06 Dest # base 202; raw 0-126
+9:51:14 Mod07 Dest # base 203; raw 0-126
+9:52:14 Mod08 Dest # base 204; raw 0-126
+9:53:14 Mod09 Dest # base 205; raw 0-126
+9:54:14 Mod10 Dest # base 206; raw 0-126
+9:55:14 Mod11 Dest # base 207; raw 0-126
+9:56:14 Mod12 Dest # base 208; raw 0-126
+9:57:14 Mod13 Dest # base 209; raw 0-126
+9:58:14 Mod14 Dest # base 210; raw 0-126
+9:59:14 Mod15 Dest # base 211; raw 0-126
+9:60:14 Mod16 Dest # base 212; raw 0-126
+9:61:14 LFO1 Dest # base 213; raw 0-126
+9:62:14 LFO2 Dest # base 214; raw 0-126
+9:63:14 LFO3 Dest # base 215; raw 0-126
+9:64:14 LFO4 Dest # base 216; raw 0-126
+9:65:14 Env3 Dest # base 217; raw 0-126
+9:66:14 Env4 Dest # base 218; raw 0-126
+9:67:14 WEnv1 Dest # base 219; raw 0-126
+9:68:14 WEnv2 Dest # base 220; raw 0-126
+9:69:14 WEnv3 Dest # base 221; raw 0-126
+9:70:14 Mod Wheel Dest # base 222; raw 0-126
+9:71:14 Velocity Dest # base 223; raw 0-126
+9:72:14 Pressure Dest # base 224; raw 0-126
+9:73:14 Footswitch Dest # base 225; raw 0-126
+9:74:14 FX1 On # base 226; raw 0-1
+9:75:14 FX1 Type # base 227; raw 0-8
+9:76:14 FX1 Sync # base 228; raw 0-1
+9:77:14 FX1 Division # base 229; raw 0-12
+9:78:14 FX2 On # base 230; raw 0-1
+9:79:14 FX2 Type # base 231; raw 0-12; table omits new Shimmer selector
+9:80:14 FX2 Sync # base 232; raw 0-1
+9:81:14 FX2 Division # base 233; raw 0-12
+9:82:14 WEnv1 Loop On # base 234; raw 0-1
+9:83:14 WEnv2 Loop On # base 235; raw 0-1
+9:84:14 WEnv3 Loop On # base 236; raw 0-1
+9:85:14 Osc1 Sync # base 237; raw 0-1
+9:86:14 Osc2 Sync # base 238; raw 0-1
+9:87:14 Osc3 Sync # base 239; raw 0-1
+9:88:14 LPF Vel Env Mode # base 240; raw 0-2
+9:89:14 Table Smooth # base 241; raw 0-1
+9:90:14 Glide Mode # base 242; raw 0-2
+9:91:14 SVF Vel Env Mode # base 243; raw 0-2
+9:92:14 Osc1 Pitch On # base 244; raw 0-1
+9:93:14 Osc2 Pitch On # base 245; raw 0-1
+9:94:14 Osc3 Pitch On # base 246; raw 0-1
+9:95:14 Upper Table On # base 247; raw 0-1
+9:96:14 Wave Env Amt # base 248; raw 0-127
+9:97:14 Osc1 Pitch # base 249; raw 0-127; 64 is zero
+9:98:14 Osc2 Pitch # base 250; raw 0-127; 64 is zero
+9:99:14 Osc3 Pitch # base 251; raw 0-127; 64 is zero
+9:100:14 Osc1 Fine # base 252; raw 0-100; 50 is zero
+9:101:14 Osc2 Fine # base 253; raw 0-100; 50 is zero
+9:102:14 Osc3 Fine # base 254; raw 0-100; 50 is zero
+9:103:14 Osc1 Level # base 255; raw 0-127
+9:104:14 Osc2 Level # base 256; raw 0-127
+9:105:14 Osc3 Level # base 257; raw 0-127
+9:106:14 Osc1 Pulse Width # base 258; raw 0-127
+9:107:14 Osc2 Pulse Width # base 259; raw 0-127
+9:108:14 Osc3 Pulse Width # base 260; raw 0-127
+9:109:14 Osc1 FM # base 261; raw 0-127
+9:110:14 Osc2 FM # base 262; raw 0-127
+9:111:14 Osc3 FM # base 263; raw 0-127
+9:112:14 Pan Spread # base 264; raw 0-127
+9:113:14 WEnv1 Pos1 # base 265; raw 0-63
+9:114:14 WEnv2 Pos1 # base 266; raw 0-63
+9:115:14 WEnv3 Pos1 # base 267; raw 0-63
+9:116:14 WEnv1 Pos2 # base 268; raw 0-63
+9:117:14 WEnv2 Pos2 # base 269; raw 0-63
+9:118:14 WEnv3 Pos2 # base 270; raw 0-63
+9:119:14 WEnv1 Pos3 # base 271; raw 0-63
+9:120:14 WEnv2 Pos3 # base 272; raw 0-63
+9:121:14 WEnv3 Pos3 # base 273; raw 0-63
+9:122:14 WEnv1 Pos4 # base 274; raw 0-63
+9:123:14 WEnv2 Pos4 # base 275; raw 0-63
+9:124:14 WEnv3 Pos4 # base 276; raw 0-63
+9:125:14 WEnv1 Pos5 # base 277; raw 0-63
+9:126:14 WEnv2 Pos5 # base 278; raw 0-63
+9:127:14 WEnv3 Pos5 # base 279; raw 0-63
+10:0:14 WEnv1 Pos6 # base 280; raw 0-63
+10:1:14 WEnv2 Pos6 # base 281; raw 0-63
+10:2:14 WEnv3 Pos6 # base 282; raw 0-63
+10:3:14 LPF Cutoff # base 283; raw 0-127
+10:4:14 LPF Resonance # base 284; raw 0-127
+10:5:14 LPF Keytrack # base 285; raw 0-127
+10:6:14 SVF Cutoff # base 286; raw 0-127
+10:7:14 SVF Resonance # base 287; raw 0-127
+10:8:14 SVF Keytrack # base 288; raw 0-127
+10:9:14 SVF Mode # base 289; raw 0-127
+10:10:14 Env3 Velocity # base 290; raw 0-127
+10:11:14 Env4 Velocity # base 291; raw 0-127
+10:12:14 LFO1 Delay # base 292; raw 0-127
+10:13:14 LFO2 Delay # base 293; raw 0-127
+10:14:14 LFO3 Delay # base 294; raw 0-127
+10:15:14 LFO4 Delay # base 295; raw 0-127
+10:16:14 Mod01 Amount # base 296; raw 0-254; 127 is zero
+10:17:14 Mod02 Amount # base 297; raw 0-254; 127 is zero
+10:18:14 Mod03 Amount # base 298; raw 0-254; 127 is zero
+10:19:14 Mod04 Amount # base 299; raw 0-254; 127 is zero
+10:20:14 Mod05 Amount # base 300; raw 0-254; 127 is zero
+10:21:14 Mod06 Amount # base 301; raw 0-254; 127 is zero
+10:22:14 Mod07 Amount # base 302; raw 0-254; 127 is zero
+10:23:14 Mod08 Amount # base 303; raw 0-254; 127 is zero
+10:24:14 Mod09 Amount # base 304; raw 0-254; 127 is zero
+10:25:14 Mod10 Amount # base 305; raw 0-254; 127 is zero
+10:26:14 Mod11 Amount # base 306; raw 0-254; 127 is zero
+10:27:14 Mod12 Amount # base 307; raw 0-254; 127 is zero
+10:28:14 Mod13 Amount # base 308; raw 0-254; 127 is zero
+10:29:14 Mod14 Amount # base 309; raw 0-254; 127 is zero
+10:30:14 Mod15 Amount # base 310; raw 0-254; 127 is zero
+10:31:14 Mod16 Amount # base 311; raw 0-254; 127 is zero
+10:32:14 LFO1 Amount # base 312; raw 0-254; 127 is zero
+10:33:14 LFO2 Amount # base 313; raw 0-254; 127 is zero
+10:34:14 LFO3 Amount # base 314; raw 0-254; 127 is zero
+10:35:14 LFO4 Amount # base 315; raw 0-254; 127 is zero
+10:36:14 WEnv1 Dest Amount # base 316; raw 0-254; 127 is zero
+10:37:14 WEnv2 Dest Amount # base 317; raw 0-254; 127 is zero
+10:38:14 WEnv3 Dest Amount # base 318; raw 0-254; 127 is zero
+10:39:14 Mod Wheel Amt # base 319; raw 0-254; 127 is zero
+10:40:14 Velocity Amt # base 320; raw 0-254; 127 is zero
+10:41:14 Pressure Amt # base 321; raw 0-254; 127 is zero
+10:42:14 Footswitch Amt # base 322; raw 0-254; 127 is zero
+10:43:14 FX1 Mix # base 323; raw 0-127
+10:44:14 FX1 Param1 # base 324; raw 0-255
+10:45:14 FX1 Param2 # base 325; raw 0-255
+10:46:14 FX1 Param3 # base 326; raw 0-255
+10:47:14 FX2 Mix # base 327; raw 0-127
+10:48:14 FX2 Param1 # base 328; raw 0-255
+10:49:14 FX2 Param2 # base 329; raw 0-255
+10:50:14 FX2 Param3 # base 330; raw 0-255
+10:51:14 Filter Sustain # base 331; raw 0-127
+10:52:14 Amp Sustain # base 332; raw 0-127
+10:53:14 Env3 Sustain # base 333; raw 0-127
+10:54:14 Env4 Sustain # base 334; raw 0-127
+10:55:14 LPF Velocity # base 335; raw 0-127
+10:56:14 SVF Velocity # base 336; raw 0-127
+10:57:14 Osc1 Key To Waves # base 337; raw 0-127
+10:58:14 Osc2 Key To Waves # base 338; raw 0-127
+10:59:14 Osc3 Key To Waves # base 339; raw 0-127
+10:60:14 LPF Saturation # base 340; raw 0-127
+10:61:14 Glide Rate # base 341; raw 0-127
+10:62:14 Part Level # base 342; raw 0-216
+10:63:14 Amp Env Velocity # base 343; raw 0-127
+10:64:14 Circuit Drift # base 344; raw 0-255
+10:68:14 FX2 Param4 # base 348; raw 0-255
+10:69:14 FX2 Param5 # base 349; raw 0-255
+10:70:14 FX2 Param6 # base 350; raw 0-255
+10:71:14 Audio In Mix # base 351; raw 0-127
+10:72:14 Part Pan # base 352; raw 0-127
+10:73:14 Part Tune # base 353; raw 0-100; 50 is zero
+10:115:14 SVF Res Comp # base 395; raw 0-1
+10:116:14 Wave Surfer # base 396; raw 0-126; 63 is zero
+11:5:14 Osc1 KeyWaves Rev # base 413; raw 0-1
+11:6:14 Osc2 KeyWaves Rev # base 414; raw 0-1
+11:7:14 Osc3 KeyWaves Rev # base 415; raw 0-1
+11:12:14 Arp Latch # base 420; raw 0-1
+11:13:14 MPE Bend Range # base 421; raw 24-96
+11:14:14 Arp Transpose # base 422; raw 0-24; 12 is zero
+11:15:14 Osc Free Run # base 423; raw 0-1
+11:31:14 Env Retrigger # base 439; raw 0-1; table omits newer mode encodings
+11:32:14 Filter Repeat # base 440; raw 0-1
+11:33:14 Amp Repeat # base 441; raw 0-1
+11:34:14 Env3 Repeat # base 442; raw 0-1
+11:35:14 Env4 Repeat # base 443; raw 0-1
+11:46:14 LFO1 Fine Amount # base 454; raw 0-254; 127 is zero
+11:47:14 LFO2 Fine Amount # base 455; raw 0-254; 127 is zero
+11:48:14 LFO3 Fine Amount # base 456; raw 0-254; 127 is zero
+11:49:14 LFO4 Fine Amount # base 457; raw 0-254; 127 is zero
+11:58:14 FX2 Param7 # base 466; raw 0-255
+# These are already part-specific Single addresses - no 1000 offset.
+3:14:14 Unison On # address 398; raw 0-1
+3:18:14 Unison Voices # address 402; raw 1-24
+3:22:14 Unison Key Mode # address 406; raw 0-5
+3:26:14 Unison Detune # address 410; raw 0-127
+3:33:14 Unison Legato # address 417; raw 0-2
+3:46:14 Unison Poly # address 430; raw 0-6
+3:52:14 Hold On # address 436; raw 0-1
+[/NRPN]
+
+[ASSIGN]
+1 NRPN:10:3:14
+2 NRPN:10:4:14
+3 NRPN:8:105:14
+4 NRPN:10:116:14
+5 NRPN:8:93:14
+6 NRPN:8:101:14
+7 NRPN:10:43:14
+8 NRPN:10:47:14
+[/ASSIGN]
+
+[AUTOMATION]
+NRPN:10:3:14
+NRPN:10:4:14
+NRPN:8:105:14
+NRPN:10:60:14
+NRPN:10:6:14
+NRPN:10:7:14
+NRPN:8:109:14
+NRPN:10:116:14
+NRPN:8:81:14
+NRPN:8:82:14
+NRPN:8:83:14
+NRPN:8:93:14
+NRPN:8:101:14
+NRPN:8:94:14
+NRPN:8:102:14
+NRPN:10:43:14
+NRPN:10:47:14
+NRPN:10:62:14
+CC:1
+CC:2
+CC:64
+PB
+AT
+[/AUTOMATION]
+
+[COMMENT]
+3rd Wave 24M Part 2
+OS 2-0d NRPN map
+MIDI Param Receive NRPN
+Include part in NRPN ON
+MPE Off for multitimbral
+Set output port and channel
+All NRPN data is 14 bit
+Use documented raw ranges
+Hardware test pending
+[/COMMENT]

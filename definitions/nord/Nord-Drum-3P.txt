@@ -1,0 +1,127 @@
+# Nord Drum 3P
+# Definition revision 0.1.0 - researched 2026-10-14
+# Target HapaxOS 3.22 and Nord Drum 3P OS 1.24.
+# Source-reviewed and statically checked; hardware verification pending.
+# https://www.nordkeyboards.com/wt/documents/97/Nord%20Drum%203P%20English%20User%20Manual%20v1.x%20Edition%20C.pdf
+# MIDI setup pp. 12-14; CC table p. 15.
+# Setup, value scaling, and community evidence: definitions/nord/README.md
+# CC values are 0-127 MIDI data, not necessarily the panel display values.
+# Tone Pitch uses the 14-bit CC31/63 pair; no NRPNs are documented.
+# No arbitrary patch defaults are declared.
+# Global kit mode: factory notes on global MIDI channel 10.
+# CC70 selects which voice receives the shared sound-control CCs.
+# Selecting a Hapax drum row does not send a Nord voice-selection command.
+# Use the Individual file for simultaneous independent voice automation.
+# Voice Select ranges reported by a controller user:
+# 1=0-21, 2=22-42, 3=43-63, 4=64-84, 5=85-106, 6=107-127.
+# Disable Pad Follow while editing a fixed selected voice.
+
+VERSION 1
+TRACKNAME Nord Drum 3P
+TYPE DRUM
+OUTPORT NULL
+OUTCHAN 10
+INPORT NULL
+INCHAN NULL
+MAXRATE 24
+
+[DRUMLANES]
+1:NULL:10:60 Voice 1
+2:NULL:10:62 Voice 2
+3:NULL:10:64 Voice 3
+4:NULL:10:65 Voice 4
+5:NULL:10:67 Voice 5
+6:NULL:10:69 Voice 6
+[/DRUMLANES]
+
+# Global bank-start favorites use community-confirmed MSB0 and LSB0-7.
+# Individual-voice definition intentionally has no kit program entries.
+[PC]
+1:0:0 Kit A01
+1:0:1 Kit B01
+1:0:2 Kit C01
+1:0:3 Kit D01
+1:0:4 Kit E01
+1:0:5 Kit F01
+1:0:6 Kit G01
+1:0:7 Kit H01
+[/PC]
+
+[CC]
+0 Bank MSB
+7 Voice Level
+10 Voice Pan
+12 Reverb Type
+13 Reverb Color
+14 Noise Cutoff
+15 Noise Filt Type
+16 Noise Dyn Filt
+17 Noise Resonance
+18 Noise Level
+19 Tone Level
+20 Noise Dec Mode
+21 Noise Decay
+23 Dist Amount
+24 Dist Type
+25 EQ Frequency
+26 EQ Gain
+30 Tone Spectra
+32 Bank LSB
+44 Delay Rate
+45 Delay Feedback
+46 Tone Wave
+47 Delay Send
+48 Reverb Send
+49 Tone Dec Mode
+50 Tone Decay
+52 Tone Freq
+53 Tone Dyn Filt
+54 Tone Bend Amt
+55 Tone Bend Time
+56 Click Level
+57 Click Type
+59 Mono Group
+70 Voice Select
+[/CC]
+
+# Raw data = 128 * semitone value + fractional byte.
+# Example from a user's MIDI capture: 60.0 -> 7680; 60.5 -> 7744.
+[CC_PAIR]
+31:63 Tone Pitch
+[/CC_PAIR]
+
+[NRPN]
+[/NRPN]
+
+[ASSIGN]
+1 CC:70
+2 CC_PAIR:31:63
+3 CC:30
+4 CC:50
+5 CC:14
+6 CC:21
+7 CC:47
+8 CC:48
+[/ASSIGN]
+
+# Only kit-wide effects are pre-created; voice CCs share the CC70 focus.
+[AUTOMATION]
+CC:12
+CC:13
+CC:44
+CC:45
+[/AUTOMATION]
+
+[COMMENT]
+Nord Drum 3P
+OS 1-24
+Factory global MIDI channel 10
+Set the connected DIN port
+Six voice rows
+CC70 selects sound edit focus
+Row selection does not select CC voice
+Use Individual for per-voice automation
+Enable CC receive on Nord
+Tone Pitch is a CC pair
+Hardware test pending
+[/COMMENT]

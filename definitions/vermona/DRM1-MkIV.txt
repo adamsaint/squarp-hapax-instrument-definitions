@@ -1,0 +1,68 @@
+# Vermona DRM1 MkIV - factory MIDI trigger map
+# Definition revision 0.1.0 - researched 2026-10-14
+# Target HapaxOS 3.22; ten drum rows require the 3.10-or-later feature.
+# Source-reviewed and statically checked; hardware verification pending.
+# https://www.vermona.com/fileadmin/user_upload/products/drm1mk4/downloads/drm1mk4_manual_web_en.pdf
+# Factory map: printed page 20. MIDI capabilities: printed page 19.
+# Setup and learned-map behavior: definitions/vermona/README.md
+#
+# The synth receives notes and velocity only; no CC/NRPN sound control.
+# Channel 10 is intentional: it is the manufacturer's factory mapping.
+# For a learned map, edit each lane's channel and note to match your unit.
+# Hi-hat closed note is always two semitones below its learned open note.
+# Load onto a fresh DRUM track; rows 11-16 are not configured by this file.
+
+VERSION 1
+TRACKNAME DRM1 MkIV
+TYPE DRUM
+OUTPORT NULL
+OUTCHAN 10
+INPORT NULL
+INCHAN NULL
+MAXRATE NULL
+
+# ROW:TRIG:CHAN:NOTENUMBER NAME
+# Note numbers follow the instrument column, not the inconsistent GM labels.
+[DRUMLANES]
+1:NULL:10:36 Kick
+2:NULL:10:45 Drum1
+3:NULL:10:50 Drum2
+4:NULL:10:56 Multi
+5:NULL:10:38 Snare
+6:NULL:10:44 HH1 Closed
+7:NULL:10:46 HH1 Open
+8:NULL:10:39 Clap
+9:NULL:10:49 HH2 Closed
+10:NULL:10:51 HH2 Open
+[/DRUMLANES]
+
+[PC]
+[/PC]
+
+[CC]
+[/CC]
+
+[CC_PAIR]
+[/CC_PAIR]
+
+[NRPN]
+[/NRPN]
+
+[ASSIGN]
+[/ASSIGN]
+
+[AUTOMATION]
+[/AUTOMATION]
+
+[COMMENT]
+Vermona DRM1 MkIV
+Factory MIDI map
+MIDI channel 10
+Set the output port
+Ten configured drum lanes
+HH2 uses rows 9 and 10
+Notes and velocity only
+No MIDI knob control
+Learned maps may differ
+Hardware test pending
+[/COMMENT]

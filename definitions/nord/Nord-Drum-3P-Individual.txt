@@ -1,0 +1,111 @@
+# Nord Drum 3P
+# Definition revision 0.1.0 - researched 2026-10-14
+# Target HapaxOS 3.22 and Nord Drum 3P OS 1.24.
+# Source-reviewed and statically checked; hardware verification pending.
+# https://www.nordkeyboards.com/wt/documents/97/Nord%20Drum%203P%20English%20User%20Manual%20v1.x%20Edition%20C.pdf
+# MIDI setup pp. 12-14; CC table p. 15.
+# Setup, value scaling, and community evidence: definitions/nord/README.md
+# CC values are 0-127 MIDI data, not necessarily the panel display values.
+# Tone Pitch uses the 14-bit CC31/63 pair; no NRPNs are documented.
+# No arbitrary patch defaults are declared.
+# Individual-voice control or melodic note sequencing.
+# Load once per voice and select that voice's individual MIDI channel.
+# Kit-global controls, bank selection and CC70 belong on the global track.
+
+VERSION 1
+TRACKNAME ND3P Voice
+TYPE POLY
+OUTPORT NULL
+OUTCHAN NULL
+INPORT NULL
+INCHAN NULL
+MAXRATE 24
+
+[DRUMLANES]
+[/DRUMLANES]
+
+# Global bank-start favorites use community-confirmed MSB0 and LSB0-7.
+# Individual-voice definition intentionally has no kit program entries.
+[PC]
+[/PC]
+
+[CC]
+7 Voice Level
+10 Voice Pan
+14 Noise Cutoff
+15 Noise Filt Type
+16 Noise Dyn Filt
+17 Noise Resonance
+18 Noise Level
+19 Tone Level
+20 Noise Dec Mode
+21 Noise Decay
+23 Dist Amount
+24 Dist Type
+25 EQ Frequency
+26 EQ Gain
+30 Tone Spectra
+46 Tone Wave
+47 Delay Send
+48 Reverb Send
+49 Tone Dec Mode
+50 Tone Decay
+52 Tone Freq
+53 Tone Dyn Filt
+54 Tone Bend Amt
+55 Tone Bend Time
+56 Click Level
+57 Click Type
+59 Mono Group
+[/CC]
+
+# Raw data = 128 * semitone value + fractional byte.
+# Example from a user's MIDI capture: 60.0 -> 7680; 60.5 -> 7744.
+[CC_PAIR]
+31:63 Tone Pitch
+[/CC_PAIR]
+
+[NRPN]
+[/NRPN]
+
+[ASSIGN]
+1 CC_PAIR:31:63
+2 CC:30
+3 CC:50
+4 CC:14
+5 CC:21
+6 CC:23
+7 CC:47
+8 CC:48
+[/ASSIGN]
+
+# Independent voice lanes use this track's individual MIDI channel.
+[AUTOMATION]
+CC_PAIR:31:63
+CC:30
+CC:50
+CC:52
+CC:54
+CC:55
+CC:14
+CC:17
+CC:21
+CC:23
+CC:47
+CC:48
+CC:7
+CC:10
+[/AUTOMATION]
+
+[COMMENT]
+Nord Drum 3P
+OS 1-24
+Individual voice mode
+Set matching individual channel
+POLY is the Hapax note mode
+Use a track per voice
+Tone Pitch 60 for keyboard scale
+Enable CC receive on Nord
+Tone Pitch is a CC pair
+Hardware test pending
+[/COMMENT]

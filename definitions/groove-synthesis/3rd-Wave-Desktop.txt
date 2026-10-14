@@ -1,0 +1,185 @@
+# Groove Synthesis 3rd Wave 24M Desktop - current CC map
+# Definition revision 0.1.0 - researched 2026-10-14
+# Target HapaxOS 3.22 and 3rd Wave OS 2.0d, released 2026-10-13.
+# Source-reviewed and statically checked; hardware verification pending.
+# MIDI Spec v2.0, 2026-09-10: https://docs.google.com/document/d/1s2u8hfVNfOSYvnMlD52nWcRQJ5-0IUAyDC80ESRla78/edit
+# Release notes: https://groovesynthesis.com/firmware/readme_2_0d.txt
+# Setup and source errata: definitions/groove-synthesis/README.md
+# No arbitrary patch defaults are declared.
+# Desktop 24M mapping only; do not use the 24K or 8M CC tables.
+# 2.0a replacements take precedence over the older rows in the MIDI table.
+# Assign uses direct controls instead of the selected-envelope and FX controls.
+# Selected Osc, selected FX, and shared-envelope names depend on panel state.
+# Set MIDI Param Receive to CC for this file. Use NRPN part files for wider access.
+
+VERSION 1
+TRACKNAME 3W Desktop CC
+TYPE POLY
+OUTPORT NULL
+OUTCHAN NULL
+INPORT NULL
+INCHAN NULL
+MAXRATE 24
+
+[DRUMLANES]
+[/DRUMLANES]
+
+# Named programs omitted until the bank-range discrepancy is hardware-checked.
+[PC]
+[/PC]
+
+[CC]
+1 Mod Wheel # 0-127
+2 Breath # 0-127
+3 Wave Flow Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+7 Volume # 0-127
+9 LPF Cutoff # 0-127
+12 WEnv Time2-5 # 0-127
+13 WEnv Time3-6 # 0-127
+14 WEnv Pos1-4 # 0-63
+15 WEnv Pos2-5 # 0-63
+16 WEnv Pos3-6 # 0-63
+17 WEnv Steps4-6 # 0-63 released, 64-127 pressed; button semantics may change panel focus
+18 WEnv Osc1 Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+19 WEnv Osc2 Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+20 WEnv Osc3 Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+21 Wave Env Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+22 Wave Surfer # 0-126; 63 is zero Wave Surfer offset
+23 Amp Attack # 0-127
+24 Selected Osc Pitch # 0-127
+25 Selected Osc Fine # 0-127
+26 Selected Osc Wave # 0-127 MIDI data; max index depends on loaded waves; prefer NRPN wave select
+27 Selected Osc Pos # 0-63
+28 Selected Osc Level # 0-127
+29 Osc1 Pitch # 0-127
+30 Osc2 Pitch # 0-127
+31 Osc3 Pitch # 0-127
+32 Bank LSB # table says 0-3; five-bank instrument; see README before using bank 5
+33 Osc1 Fine # 0-127
+34 Osc2 Fine # 0-127
+35 Osc3 Fine # 0-127
+36 Osc1 Wave # 0-127 MIDI data; max index depends on loaded waves; prefer NRPN wave select
+37 LPF Resonance # 0-127
+39 LPF Env Amt # 0-127
+40 Osc2 Wave # 0-127 MIDI data; max index depends on loaded waves; prefer NRPN wave select
+41 Osc3 Wave # 0-127 MIDI data; max index depends on loaded waves; prefer NRPN wave select
+42 Osc1 Wave Pos # 0-63
+43 Filter Attack # 0-127
+44 Filter Decay # 0-127
+45 Filter Sustain # 0-127
+46 Filter Release # 0-127
+47 Osc2 Wave Pos # 0-63
+48 Osc3 Wave Pos # 0-63
+49 Osc1 Level # 0-127
+50 Osc2 Level # 0-127
+51 Osc3 Level # 0-127
+52 Amp Decay # 0-127
+53 Amp Sustain # 0-127
+54 Amp Release # 0-127
+55 Seq Record Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+56 Seq Play Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+57 SVF Bandpass Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+58 SVF Mode # 0-127
+59 SVF Cutoff # 0-127
+60 SVF Resonance # 0-127
+61 SVF Env Amt # 0-127
+62 SVF Velocity # 0-127
+63 LPF Saturation # 0-127
+64 Sustain Pedal # 0-63 released, 64-127 pressed
+68 LPF Velocity # 0-127
+69 Hold Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+70 Filter-Env3 Attack # 0-127
+71 Filter-Env3 Decay # 0-127
+72 Filter-Env3 Sustain # 0-127
+73 Filter-Env3 Release # 0-127
+75 Amp-Env4 Decay # 0-127
+76 Amp-Env4 Sustain # 0-127
+77 Amp-Env4 Release # 0-127
+78 Arp Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+79 Arp Mode # 0-4: up, down, up-down, assign, random
+80 Env3 Decay # 0-127
+81 Env3 Select Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+82 Env4 Select Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+83 Env3 Attack # 0-127
+85 Env3 Sustain # 0-127
+86 Env3 Release # 0-127
+87 Env4 Attack # 0-127
+88 Env3 Amount # 0-127 scaled bipolar; 64 is zero
+89 Env4 Decay # 0-127
+90 Multipart Mode Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+91 Part1 Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+92 Part2 Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+93 Part3 Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+94 Part4 Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+95 FX1 On Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+102 FX1 Edit Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+103 Selected FX Type # FX1 0-8; FX2 table says 0-12 but omits new Shimmer; selected FX context
+104 Selected FX Mix # 0-127
+105 Selected FX Param1 # 0-127
+106 Selected FX Param2 # 0-127
+107 Selected FX Param3 # 0-127
+109 FX2 Edit Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+110 Env4 Sustain # 0-127
+111 FX2 Mix # 0-127
+112 Env4 Amount # 0-127 scaled bipolar; 64 is zero
+113 Env4 Release # 0-127
+114 FX1 Mix # 0-127
+115 Unison Btn # 0-63 released, 64-127 pressed; button semantics may change panel focus
+116 Pan Spread # 0-127
+117 WEnv Time1-4 # 0-127
+118 Amp-Env4 Attack # 0-127
+119 Unison Detune # 0-127
+[/CC]
+
+[CC_PAIR]
+[/CC_PAIR]
+
+[NRPN]
+[/NRPN]
+
+[ASSIGN]
+1 CC:9
+2 CC:37
+3 CC:39
+4 CC:22
+5 CC:43
+6 CC:46
+7 CC:114
+8 CC:111
+[/ASSIGN]
+
+[AUTOMATION]
+CC:9
+CC:37
+CC:39
+CC:63
+CC:59
+CC:60
+CC:61
+CC:22
+CC:42
+CC:47
+CC:48
+CC:43
+CC:46
+CC:23
+CC:54
+CC:114
+CC:111
+CC:1
+CC:2
+CC:64
+PB
+AT
+[/AUTOMATION]
+
+[COMMENT]
+3rd Wave 24M Desktop
+OS 2-0d CC map
+MIDI Param Receive CC
+MPE Off for normal tracks
+Set output port and channel
+New direct envelope controls
+No named programs
+Hardware test pending
+[/COMMENT]

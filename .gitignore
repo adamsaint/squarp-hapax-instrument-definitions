@@ -1,0 +1,22 @@
+.DS_Store
+._*
+.Spotlight-V100/
+.Trashes/
+__pycache__/
+*.py[cod]
+.venv/
+
+# Private project skills, agent instructions, and workspace state
+/.local/
+AGENTS.md
+/.agents/
+/.codex/
+/.vscode/
+/.idea/
+
+# Local authoring and administration tools
+/scripts/
+/templates/
+/CONTRIBUTING.md
+/.editorconfig
+/.gitattributes

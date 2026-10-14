@@ -1,0 +1,210 @@
+# Dreadbox Typhon - current 4.2 MIDI map
+# Definition revision 0.1.0 - researched 2026-10-14
+# Target HapaxOS 3.22 and Typhon firmware 4.2.1.
+# Source-reviewed and statically checked; hardware verification pending.
+# https://dreadbox-fx.com/wp-content/uploads/2026/04/Typhon-Users-Manual_2026.pdf
+# MIDI table: printed pages 23-24. Current global settings: page 20.
+# https://dreadbox-fx.com/typhon-update-v4-2-1/
+# Bank selection corroboration and setup: definitions/dreadbox/README.md
+#
+# CC data is 7-bit, 0-127. Display scales and selector thresholds vary.
+# Generic modulator and FX parameter meanings depend on the selected mode.
+# CC32 is not M2 Param3; the current manual assigns that control to CC33.
+# CC120 and CC123 are channel-mode messages, outside Hapax CC destinations.
+# No arbitrary patch defaults are declared.
+
+VERSION 1
+TRACKNAME Typhon
+TYPE POLY
+OUTPORT NULL
+OUTCHAN NULL
+INPORT NULL
+INCHAN NULL
+MAXRATE 24
+
+[DRUMLANES]
+[/DRUMLANES]
+
+# Four bank-start favorites, not a complete list of the 256 presets.
+# Community-tested bank bytes; retest on Typhon 4.2.1.
+# https://squarp.community/t/some-def-files-not-working-in-new-firmware/10585
+# Definition PC1 sends wire program 0. Bank MSB values are zero-based.
+[PC]
+1:0:NULL Bank A 01
+1:1:NULL Bank B 01
+1:2:NULL Bank C 01
+1:3:NULL Bank D 01
+[/PC]
+
+[CC]
+# Performance and core sound
+1 Mod Wheel
+2 CC2 Amount
+4 Filter FM
+5 Glide
+6 Filter Env Amt
+7 Preset Volume
+8 Filter Attack
+9 Filter Decay
+10 Filter Sustain
+11 Filter Release
+12 Filter Env Time
+
+# Modulator 1
+13 M1 Param1
+14 M1 Param2
+15 M1 Param3
+16 M1 Mode
+17 M1 Pitch All
+18 M1 Pitch Osc1
+19 M1 Pitch Osc2
+20 M1 Wave Amt
+21 M1 Cutoff Amt
+22 M1 Amp Amt
+23 M1 FX1 Amt
+24 M1 FilterFM Amt
+25 M1 FX2 Amt
+26 M1 FX3 Amt
+27 M1 Custom1 Amt
+28 M1 Custom2 Amt
+29 M1 Custom3 Amt
+
+# Modulator 2 - CC32 intentionally absent
+30 M2 Param1
+31 M2 Param2
+33 M2 Param3
+34 M2 Mode
+35 M2 Pitch All
+36 M2 Pitch Osc1
+37 M2 Pitch Osc2
+38 M2 Wave Amt
+39 M2 Cutoff Amt
+40 M2 Amp Amt
+41 M2 FX1 Amt
+42 M2 FilterFM Amt
+43 M2 FX2 Amt
+44 M2 FX3 Amt
+45 M2 Custom1 Amt
+46 M2 Custom2 Amt
+47 M2 Custom3 Amt
+
+# Modulator 3 - sustain occupies CC64 between two custom amounts
+48 M3 Param1
+49 M3 Param2
+50 M3 Param3
+51 M3 Mode
+52 M3 Pitch All
+53 M3 Pitch Osc1
+54 M3 Pitch Osc2
+55 M3 Wave Amt
+56 M3 Cutoff Amt
+57 M3 Amp Amt
+58 M3 FX1 Amt
+59 M3 FilterFM Amt
+60 M3 FX2 Amt
+61 M3 FX3 Amt
+62 M3 Custom1 Amt
+63 M3 Custom2 Amt
+64 Sustain Pedal
+65 M3 Custom3 Amt
+
+# More core sound controls
+67 Glide Mode
+68 Legato
+70 Waveshape
+# The MIDI table calls CC71 VCO Resonance; see README for the label issue.
+71 Resonance
+72 Amp Release
+73 Amp Attack
+74 Cutoff
+75 Filter Keytrack
+76 Osc Level
+77 Osc2 Offset
+78 Amp Env Time
+79 Amp Sustain
+80 Amp Decay
+
+# FX1 - distortion block
+81 FX1 HP Cutoff
+82 FX1 HP Res
+83 FX1 Param1
+84 FX1 Param2
+85 FX1 Mix
+86 FX1 Type
+
+# FX2 - modulation block
+87 FX2 Param1
+88 FX2 Param2
+89 FX2 Param3
+90 FX2 Feed
+91 FX2 Mix
+92 FX2 Type
+
+# FX3 - delay and reverb block
+93 FX3 Param1
+94 FX3 Param2
+95 FX3 Feed
+96 FX3 Param4
+97 FX3 Mix
+98 FX3 Type
+
+# Typhon internal sequencer, not Hapax sequence settings
+99 Seq Length
+100 Seq Division
+101 Seq Probability
+102 Seq Swing
+[/CC]
+
+[CC_PAIR]
+[/CC_PAIR]
+
+[NRPN]
+[/NRPN]
+
+[ASSIGN]
+1 CC:74
+2 CC:71
+3 CC:70
+4 CC:77
+5 CC:6
+6 CC:5
+7 CC:91
+8 CC:97
+[/ASSIGN]
+
+# A performance selection; other named CCs can be added as lanes on Hapax.
+[AUTOMATION]
+CC:74
+CC:71
+CC:70
+CC:77
+CC:4
+CC:6
+CC:8
+CC:11
+CC:73
+CC:72
+CC:76
+CC:5
+CC:85
+CC:91
+CC:97
+CC:1
+CC:2
+CC:64
+PB
+AT
+[/AUTOMATION]
+
+[COMMENT]
+Dreadbox Typhon
+For firmware 4-2-1
+Set output port and channel
+Enable MIDI CC IN
+CC Handling Overriding
+Enable PC IN for bank names
+Four bank-start favorites
+FX and M params vary by mode
+Internal sequencer initially off
+Hardware test pending
+[/COMMENT]
