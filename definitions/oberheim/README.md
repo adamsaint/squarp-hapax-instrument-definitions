@@ -2,7 +2,7 @@
 
 Use [OB-X8.txt](OB-X8.txt) for polyphonic sequencing and CC performance control on Hapax. **Revision 0.2.0 replaces the original NRPN definition** with eight knobs chosen for pads, sustained chords, and evolving textures. The separate CC filename has been retired.
 
-The target is HapaxOS 3.22 and **OB-X8 Main OS 2.0.0.1**, the latest versions listed by [Squarp](https://squarp.net/hapax/firmware/) and [Oberheim](https://oberheim.com/products/ob-x8/) when checked on October 14, 2026. The file is **source-reviewed and statically checked**. Reloading resolved the reported Assign display issue, but audible CC response remains under investigation. Endpoint, recording, and persistence checks remain pending.
+The target is HapaxOS 3.22 and **OB-X8 Main OS 2.0.0.1**, the latest versions listed by [Squarp](https://squarp.net/hapax/firmware/) and [Oberheim](https://oberheim.com/products/ob-x8/) when checked on October 14, 2026. The file is **source-reviewed and statically checked**. Reloading resolved the reported Assign display issue, and the user subsequently reported working CC control after restarting both devices. Verification of every mapped control, endpoint coverage, recording, and persistence remains pending.
 
 ## Install and setup
 
@@ -17,11 +17,17 @@ These globals are documented in the [OB-X8 manual, printed pp. 13 and 17-18, and
 
 ### Migration check: old Assign controls or unreadable comments
 
-On October 14, 2026, the user reported loading the CC file onto a track that previously used the NRPN definition. Assign still showed values such as 2688 and 3392, numeric parameter labels, and Mod Lever in slot 8; the definition comments were reportedly unreadable. The user initially reported success after loading onto an unused track, then clarified that reloading resolved the display issue while parameter changes still had no apparent audible effect. This confirms a display/load improvement only; it does not establish correct CC transmission, audible response, the underlying firmware cause, or a general rule that reloading definitions always fails.
+On October 14, 2026, the user reported loading the CC file onto a track that previously used the NRPN definition. Assign still showed values such as 2688 and 3392, numeric parameter labels, and Mod Lever in slot 8; the definition comments were reportedly unreadable. Loading onto an unused track/reloading resolved the display issue. That result established a display/load improvement only; a subsequent CC-response issue and recovery are recorded below. The underlying cause of the stale display was not isolated.
 
 Keep the old track intact and explicitly load `OB-X8.txt` through **2ND + track > Instrument Definition** on an unused POLY track. Restore the intended output port and channel. In **2ND + FILL**, the new layout has **LFO1 Depth1 / CC53 in slot 8**, and all eight controls use **0-127** values. The comment popup should begin with `Oberheim OB-X8 CC` and `Definition v0-2`; full comment-popup verification was not separately reported after reloading.
 
 Assignments belong to the track, so choosing another pattern on that same track does not provide an unused set of assignments. See [Squarp's Assign instructions](https://squarp.net/hapax/manual/). Replacing the SD file alone also does not update saved assignments; a [community report on definition reloads](https://squarp.community/t/instrument-definitions-force-to-reload-recharge/10393) describes the need to load updated files explicitly. No syntax or MIDI mapping change was needed to resolve the reported display issue.
+
+### CC output appears in the monitor, but controls do not respond
+
+In the same October 14 test, notes played through a direct DIN cable from Hapax MIDI OUT A to the OB-X8 MIDI IN, with both set to channel 1. The OB-X8 had MIDI Param Receive = CC and MIDI Control Enable = On; Hapax's Faster MIDI A was already Off. Hapax's output monitor showed CC34 on the intended route. A temporary CC7 / Master Volume assignment also showed values of 0-127 but produced no reported volume change. **The user then restarted both devices and reported that control worked.** The definition remained unchanged. Both devices were restarted together, so the affected device and underlying cause were not isolated; this is a reported recovery, not proof of a specific firmware bug.
+
+If the same symptoms persist after checking routing and the receive settings above, save any project and patch edits you want to keep, restart both devices, and retest. A restart is not established as a routine installation requirement. If using encoder 2 for the temporary Master Volume test, restore it to **CC34 / Filter Resonance** afterwards. Hapax's output monitor verifies the displayed outgoing events, but does not by itself prove reception or processing by the synth.
 
 ## Performance controls
 
@@ -91,7 +97,7 @@ This file does not configure MPE zones or per-note aftertouch. Hapax's AFTR/POLY
 
 ## Hardware acceptance test
 
-**Audible CC control is not yet verified.** On October 14, 2026, the user confirmed a direct DIN cable from Hapax MIDI OUT A to the OB-X8 MIDI IN, with notes playing on channel 1, MIDI Param Receive set to CC, and MIDI Control Enable set to On. Hapax's output monitor showed CC34 on the intended output and channel, but there was no apparent audible parameter response. A temporary Master Volume CC7 assignment also produced no reported volume change. Hapax's Faster MIDI A setting was already Off. Exact outgoing data values and receipt at the synth have not been captured; Hapax's output log alone does not establish receipt or processing by the OB-X8. The complete checks below remain pending.
+**CC response has been reported after restarting both devices.** This is limited hardware feedback: the user has not separately confirmed every mapped control, full endpoint coverage, recording/replay, or persistence. The displayed OS versions and physical MIDI traffic were not captured. The recovery above does not complete the acceptance checks below.
 
 1. Record both displayed OS versions, connection type, channel, and definition revision. Load on a fresh track; confirm eight assignments, 18 lanes, and no parser warnings.
 2. Verify notes, note-offs, sustain, pitch bend, and pressure with suitable patch routing.
