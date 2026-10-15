@@ -16,7 +16,7 @@ Researched **October 14, 2026** against **[HapaxOS 3.22](https://squarp.net/hapa
 
 The OB-X8 definition uses 21 named CCs, eight encoder assignments for pads and evolving textures, and 18 empty automation lanes. Revision 0.2.0 replaces the original NRPN setup after user testing confirmed unusable 64-unit Assign increments. Set the OB-X8 to receive CC parameters and load the new file on a fresh track. Cutoff and envelope-time endpoint coverage remains unverified; the guide distinguishes legal MIDI values from confirmed parameter ranges. The target is ordinary polyphonic MIDI operation on OB-X8 OS 2.0.0.1.
 
-The DRM1 MkIV definition provides ten factory-mapped drum articulations, including both open/closed hi-hat pairs. It uses the manufacturer's channel 10 mapping and note velocity for dynamics; the device does not accept MIDI sound-parameter control.
+The DRM1 MkIV definition provides ten factory-mapped drum articulations, including both open/closed hi-hat pairs. Revision 0.3.0 restores the original order in lanes 1-10, starting with Kick, and keeps `-` labels for spare lanes 11-16. It uses the manufacturer's channel 10 mapping and note velocity for dynamics; the device does not accept MIDI sound-parameter control.
 
 The Typhon definition targets firmware 4.2.1 and its current 98-controller map, with eight encoder assignments, 20 empty automation lanes, and four bank-start favorites. Older Typhon CC charts differ; its guide records the corrected CC32/33 entry and the community provenance of bank selection.
 
