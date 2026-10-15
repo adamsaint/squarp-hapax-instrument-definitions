@@ -2,7 +2,7 @@
 
 Use [OB-X8.txt](OB-X8.txt) for polyphonic sequencing and CC performance control on Hapax. **Revision 0.2.0 replaces the original NRPN definition** with eight knobs chosen for pads, sustained chords, and evolving textures. The separate CC filename has been retired.
 
-The target is HapaxOS 3.22 and **OB-X8 Main OS 2.0.0.1**, the latest versions listed by [Squarp](https://squarp.net/hapax/firmware/) and [Oberheim](https://oberheim.com/products/ob-x8/) when checked on October 14, 2026. The file is **source-reviewed and statically checked**. The user reports CC controls working after loading onto a fresh track; full endpoint, recording, and persistence checks remain pending.
+The target is HapaxOS 3.22 and **OB-X8 Main OS 2.0.0.1**, the latest versions listed by [Squarp](https://squarp.net/hapax/firmware/) and [Oberheim](https://oberheim.com/products/ob-x8/) when checked on October 14, 2026. The file is **source-reviewed and statically checked**. Reloading resolved the reported Assign display issue, but audible CC response remains under investigation. Endpoint, recording, and persistence checks remain pending.
 
 ## Install and setup
 
@@ -17,11 +17,11 @@ These globals are documented in the [OB-X8 manual, printed pp. 17-18 and 112-120
 
 ### Migration check: old Assign controls or unreadable comments
 
-On October 14, 2026, the user reported loading the CC file onto a track that previously used the NRPN definition. Assign still showed values such as 2688 and 3392, numeric parameter labels, and Mod Lever in slot 8; the definition comments were reportedly unreadable. Loading the same definition onto an unused track made the controls appear to work correctly. This isolates the observed problem to the existing-track migration path, but does not establish the underlying firmware cause or a general rule that reloading definitions always fails.
+On October 14, 2026, the user reported loading the CC file onto a track that previously used the NRPN definition. Assign still showed values such as 2688 and 3392, numeric parameter labels, and Mod Lever in slot 8; the definition comments were reportedly unreadable. The user initially reported success after loading onto an unused track, then clarified that reloading resolved the display issue while parameter changes still had no apparent audible effect. This confirms a display/load improvement only; it does not establish correct CC transmission, audible response, the underlying firmware cause, or a general rule that reloading definitions always fails.
 
-Keep the old track intact and explicitly load `OB-X8.txt` through **2ND + track > Instrument Definition** on an unused POLY track. Restore the intended output port and channel. In **2ND + FILL**, the new layout has **LFO1 Depth1 / CC53 in slot 8**, and all eight controls use **0-127** values. The comment popup should begin with `Oberheim OB-X8 CC` and `Definition v0-2`; full comment-popup verification was not separately reported after the successful fresh-track load.
+Keep the old track intact and explicitly load `OB-X8.txt` through **2ND + track > Instrument Definition** on an unused POLY track. Restore the intended output port and channel. In **2ND + FILL**, the new layout has **LFO1 Depth1 / CC53 in slot 8**, and all eight controls use **0-127** values. The comment popup should begin with `Oberheim OB-X8 CC` and `Definition v0-2`; full comment-popup verification was not separately reported after reloading.
 
-Assignments belong to the track, so choosing another pattern on that same track does not provide an unused set of assignments. See [Squarp's Assign instructions](https://squarp.net/hapax/manual/). Replacing the SD file alone also does not update saved assignments; a [community report on definition reloads](https://squarp.community/t/instrument-definitions-force-to-reload-recharge/10393) describes the need to load updated files explicitly. No syntax or MIDI mapping change was required for the reported fresh-track success.
+Assignments belong to the track, so choosing another pattern on that same track does not provide an unused set of assignments. See [Squarp's Assign instructions](https://squarp.net/hapax/manual/). Replacing the SD file alone also does not update saved assignments; a [community report on definition reloads](https://squarp.community/t/instrument-definitions-force-to-reload-recharge/10393) describes the need to load updated files explicitly. No syntax or MIDI mapping change was needed to resolve the reported display issue.
 
 ## Performance controls
 
@@ -91,7 +91,7 @@ This file does not configure MPE zones or per-note aftertouch. Hapax's AFTR/POLY
 
 ## Hardware acceptance test
 
-**Basic CC Assign operation on a fresh track is user-reported as working.** The migration check above records the preceding failure on an existing NRPN track. The complete checks below, including full endpoint coverage, remain pending; the report does not establish that every controller, recording path, or save/reload case passed. Static validation alone does not test Squarp's parser or the synth's response.
+**Audible CC control is not yet verified.** The migration check above records the resolved display issue. The user subsequently reported no apparent audible parameter changes despite notes playing from the same Hapax track, MIDI Param Receive set to CC, and MIDI Control Enable set to On. Outgoing CC messages still need to be observed. The complete checks below remain pending; successful loading and sensible on-screen values do not establish the synth's response.
 
 1. Record both displayed OS versions, connection type, channel, and definition revision. Load on a fresh track; confirm eight assignments, 18 lanes, and no parser warnings.
 2. Verify notes, note-offs, sustain, pitch bend, and pressure with suitable patch routing.
