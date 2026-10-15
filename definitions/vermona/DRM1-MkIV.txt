@@ -1,5 +1,5 @@
 # Vermona DRM1 MkIV - factory MIDI trigger map
-# Definition revision 0.1.1 - updated 2026-10-14
+# Definition revision 0.2.0 - updated 2026-10-14
 # Target HapaxOS 3.22; ten drum rows require the 3.10-or-later feature.
 # Source-reviewed and statically checked; hardware verification pending.
 # https://www.vermona.com/fileadmin/user_upload/products/drm1mk4/downloads/drm1mk4_manual_web_en.pdf
@@ -10,8 +10,10 @@
 # Channel 10 is intentional: it is the manufacturer's factory mapping.
 # For a learned map, edit each lane's channel and note to match your unit.
 # Hi-hat closed note is always two semitones below its learned open note.
-# Hapax keeps 16 drum slots. Rows 11-16 are labeled - to reduce clutter.
-# These label-only entries preserve routing; they do not hide or mute the rows.
+# Display order is top to bottom: row 16 Kick through row 7 HH2 Open.
+# Hapax keeps 16 slots. Spare rows 1-6 are labeled - and send note 0 on ch 10.
+# Note 0 is unused by the factory DRM1 map; it is not a MIDI disable command.
+# Load on a fresh track: this revision changes the row layout used by 0.1.x.
 
 VERSION 1
 TRACKNAME DRM1 MkIV
@@ -25,23 +27,24 @@ MAXRATE NULL
 # ROW:TRIG:CHAN:NOTENUMBER NAME
 # Note numbers follow the instrument column, not the inconsistent GM labels.
 [DRUMLANES]
-1:NULL:10:36 Kick
-2:NULL:10:45 Drum1
-3:NULL:10:50 Drum2
-4:NULL:10:56 Multi
-5:NULL:10:38 Snare
-6:NULL:10:44 HH1 Closed
-7:NULL:10:46 HH1 Open
-8:NULL:10:39 Clap
-9:NULL:10:49 HH2 Closed
-10:NULL:10:51 HH2 Open
-# Spare slots: NULL preserves routing; a literal - replaces the default name.
-11:NULL:NULL:NULL -
-12:NULL:NULL:NULL -
-13:NULL:NULL:NULL -
-14:NULL:NULL:NULL -
-15:NULL:NULL:NULL -
-16:NULL:NULL:NULL -
+# Lowest rows are spare. Note 0 does not trigger the factory DRM1 map.
+1:NULL:10:0 -
+2:NULL:10:0 -
+3:NULL:10:0 -
+4:NULL:10:0 -
+5:NULL:10:0 -
+6:NULL:10:0 -
+# Hapax displays these rows in descending order, with Kick at the top.
+7:NULL:10:51 HH2 Open
+8:NULL:10:49 HH2 Closed
+9:NULL:10:39 Clap
+10:NULL:10:46 HH1 Open
+11:NULL:10:44 HH1 Closed
+12:NULL:10:38 Snare
+13:NULL:10:56 Multi
+14:NULL:10:50 Drum2
+15:NULL:10:45 Drum1
+16:NULL:10:36 Kick
 [/DRUMLANES]
 
 [PC]
@@ -68,8 +71,11 @@ Factory MIDI map
 MIDI channel 10
 Set the output port
 Ten mapped drum lanes
-HH2 uses rows 9 and 10
-Rows 11-16 are spare
+Kick at top - row 16
+HH2 uses rows 8 and 7
+Rows 1-6 are spare
+Spare note 0 - factory silent
+Use a fresh track for v0-2
 Notes and velocity only
 No MIDI knob control
 Learned maps may differ
