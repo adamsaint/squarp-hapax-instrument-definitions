@@ -9,11 +9,11 @@ The target is HapaxOS 3.22 and **OB-X8 Main OS 2.0.0.1**, the latest versions li
 1. Download the raw [OB-X8.txt](OB-X8.txt) and replace `HAPAX/OB-X8.txt` on the SD card. If you copied the temporary `OB-X8-CC.txt` file, it can be removed to avoid duplicate choices.
 2. Load the definition on a **fresh, previously unused POLY track**, rather than selecting an empty pattern on the old track. Existing NRPN automation is not converted to CC by loading this file or changing the synth's receive mode. See the migration check below if the old Assign layout remains visible.
 3. Set Hapax's MIDI output port and channel to match the OB-X8. Routing fields are `NULL`, so the file preserves existing settings. Use Hapax's USB Host port for a direct USB synth connection, or the connected DIN output.
-4. Set **MIDI Param Receive = CC**, **MIDI Control Enable = On**, and **MPE = Off** on the OB-X8. Begin with a single program outside Split/Double mode.
+4. Set **MIDI Param Receive = CC** and **MIDI Control Enable = On** on the OB-X8. For ordinary MIDI operation, set **MIDI Channel** to the matching numbered channel rather than **MPE Enabled**. Begin with a single program outside Split/Double mode.
 5. For output-only testing, set **MIDI Param Send = Off**. To record the OB-X8's panel movements later, set Send to CC and configure Hapax's input and recording. Send and Receive are independent settings.
-6. If the OB-X8 keyboard is routed through Hapax and returned to the synth, set **Local Control = Off** to avoid doubled notes. Choose the appropriate OB-X8 MIDI Out Cable when using that return path.
+6. If the OB-X8 keyboard is routed through Hapax and returned to the synth, set **Local Control = Keys/Levers Off** to avoid doubled notes while keeping panel controls active. Choose the appropriate OB-X8 MIDI Out Cable when using that return path.
 
-These globals are documented in the [OB-X8 manual, printed pp. 17-18 and 112-120](https://oberheim.com/wp-content/uploads/2023/09/OB-X8-Manual-V2_2.pdf). Local Control guidance also appears in [Oberheim's troubleshooting guide](https://support.oberheim.com/hc/en-gb/articles/7067213876370-OB-X8-Troubleshooting-Guide).
+These globals are documented in the [OB-X8 manual, printed pp. 13 and 17-18, and MIDI reference pp. 112-120](https://oberheim.com/wp-content/uploads/2023/09/OB-X8-Manual-V2_2.pdf). The **MPE Enabled** channel option is described in the [OS 2.0 addendum](https://oberheim.com/wp-content/uploads/2024/07/OB-X8-OS2.0-Addendum.pdf). Local Control guidance also appears in [Oberheim's troubleshooting guide](https://support.oberheim.com/hc/en-gb/articles/7067213876370-OB-X8-Troubleshooting-Guide).
 
 ### Migration check: old Assign controls or unreadable comments
 
@@ -91,7 +91,7 @@ This file does not configure MPE zones or per-note aftertouch. Hapax's AFTR/POLY
 
 ## Hardware acceptance test
 
-**Audible CC control is not yet verified.** The migration check above records the resolved display issue. The user subsequently reported no apparent audible parameter changes despite notes playing from the same Hapax track, MIDI Param Receive set to CC, and MIDI Control Enable set to On. Outgoing CC messages still need to be observed. The complete checks below remain pending; successful loading and sensible on-screen values do not establish the synth's response.
+**Audible CC control is not yet verified.** On October 14, 2026, the user confirmed a direct DIN cable from Hapax MIDI OUT A to the OB-X8 MIDI IN, with notes playing on channel 1, MIDI Param Receive set to CC, and MIDI Control Enable set to On. Hapax's output monitor showed CC34 on the intended output and channel, but there was no apparent audible parameter response. A temporary Master Volume CC7 assignment also produced no reported volume change. Hapax's Faster MIDI A setting was already Off. Exact outgoing data values and receipt at the synth have not been captured; Hapax's output log alone does not establish receipt or processing by the OB-X8. The complete checks below remain pending.
 
 1. Record both displayed OS versions, connection type, channel, and definition revision. Load on a fresh track; confirm eight assignments, 18 lanes, and no parser warnings.
 2. Verify notes, note-offs, sustain, pitch bend, and pressure with suitable patch routing.
