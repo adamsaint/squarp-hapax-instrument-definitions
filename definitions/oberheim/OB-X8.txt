@@ -1,20 +1,18 @@
-# Oberheim OB-X8 - conventional MIDI performance and NRPN sound controls
-# Definition revision 0.1.1 - updated 2026-10-14
+# Oberheim OB-X8 - CC performance controls for pads and evolving textures
+# Definition revision 0.2.0 - updated 2026-10-14
 # Target HapaxOS 3.22 and OB-X8 Main OS 2.0.0.1
-# Status: source-reviewed and statically checked; hardware verification pending.
-# Setup, exclusions and test procedure: definitions/oberheim/README.md
-# Sources:
-# https://squarp.net/hapax/instr_def/template.txt
+# Source-reviewed and statically checked; hardware verification pending.
+# Source: OB-X8 manual, printed pp. 113-116, PDF sheets 123-126.
 # https://oberheim.com/wp-content/uploads/2023/09/OB-X8-Manual-V2_2.pdf
-# https://oberheim.com/wp-content/uploads/2024/07/OB-X8-OS2.0-Addendum.pdf
+# Setup and endpoint checks: definitions/oberheim/README.md
 #
-# OB-X8: MIDI Param Receive = NRPN; MIDI Control Enable = On; MPE = Off.
-# Choose matching MIDI port/channel on Hapax and OB-X8 before playing.
-# All NRPNs use 14-bit DATA encoding, including parameters whose range is 0-1.
-# Published parameter ranges below are comments, NOT Hapax range constraints.
-# The 2026 template has no MIN/MAX or enumerated-value syntax.
-# User reports unusably large NRPN Assign increments; see README.
-# OB-X8-CC.txt provides a separate CC performance setup for testing.
+# OB-X8: MIDI Param Receive = CC; MIDI Control Enable = On; MPE = Off.
+# This replaces the NRPN setup in revisions 0.1.x of OB-X8.txt.
+# Existing NRPN automation is not converted; use a fresh track.
+# Load on a fresh track and choose the MIDI output port/channel.
+# Assign and automation send ordinary CC values 0-127.
+# Cutoff and envelope-time endpoint scaling is not established by the manual.
+# Do not assume CC127 reaches NRPN175 cutoff or NRPN255 envelope time.
 # No explicit parameter defaults or program changes are configured.
 
 VERSION 1
@@ -24,190 +22,78 @@ OUTPORT NULL
 OUTCHAN NULL
 INPORT NULL
 INCHAN NULL
-# 24 updates per quarter note per automation lane; tune for your MIDI traffic.
 MAXRATE 24
 
 [DRUMLANES]
 [/DRUMLANES]
 
-# Bank mapping and patch names require verification on the target instrument.
 [PC]
 [/PC]
 
-# Performance controllers remain distinct from the NRPN sound-parameter map.
-# CC values are always 0-127 on the wire, regardless of the synth display.
+# All transmitted CC values are 0-127.
+# This focused map covers performance controls and both envelopes.
+# No claim that these are all OB-X8 parameters or all OS2 additions.
 [CC]
-1 Mod Lever            # 0-127
-2 Breath               # 0-127
-4 Foot                 # 0-127
-7 Master Volume        # 0-127
-11 Expression          # 0-127
-64 Sustain             # 0-63 off, 64-127 on
-74 Brightness          # 0-127; response depends on OB-X8 settings
+1 Mod Lever
+2 Breath
+3 Vintage               # Published parameter domain 0-127
+4 Foot
+7 Master Volume
+11 Expression
+31 Filter Env Amt        # Published parameter domain 0-127
+33 Filter Cutoff         # Published parameter domain 0-175; CC scaling unverified
+34 Filter Resonance      # Published parameter domain 0-127
+39 Filter Attack         # Published parameter domain 0-255; CC scaling unverified
+40 Filter Decay          # Published parameter domain 0-255; CC scaling unverified
+41 Filter Sustain        # Published parameter domain 0-127
+42 Filter Release        # Published parameter domain 0-255; CC scaling unverified
+45 Amp Attack            # Published parameter domain 0-255; CC scaling unverified
+46 Amp Decay             # Published parameter domain 0-255; CC scaling unverified
+47 Amp Sustain           # Published parameter domain 0-127
+48 Amp Release           # Published parameter domain 0-255; CC scaling unverified
+51 LFO1 Rate             # Published parameter domain 0-127
+53 LFO1 Depth1           # 0-127; configure LFO destinations on the synth
+64 Sustain               # 0-63 off, 64-127 on
+74 Brightness            # Response depends on OB-X8 modulation settings
 [/CC]
 
-# OB-X8 NRPN data-entry CC6/38 is NOT a standalone CC_PAIR parameter.
 [CC_PAIR]
 [/CC_PAIR]
 
-# Syntax: address MSB:address LSB:data depth NAME
-# Ranges are raw parameter values from the published MIDI table.
-# They are not voltages, milliseconds, percentages, or enum labels.
 [NRPN]
-# Oscillators
-0:1:14 Osc1 Frequency      # 0-63
-0:2:14 Osc2 Frequency      # 0-63
-0:3:14 Osc2 Detune         # 0-63
-0:4:14 Voice Detune        # 0-127
-0:5:14 Osc1 Waveform       # 0-3 in base manual; OS2 combinations unverified
-0:6:14 Osc2 Waveform       # 0-3 in base manual; OS2 combinations unverified
-0:7:14 Osc1 Pulsewidth     # 0-127
-0:8:14 Osc2 Pulsewidth     # 0-127
-0:9:14 Osc1 Xmod On        # 0-1
-0:10:14 Square Mode        # 0-1
-0:11:14 Xmod Amount        # 0-127
-0:12:14 Osc1 Env Mod       # 0-1; separate from NRPN9 despite duplicate CC12
-0:13:14 Osc Sync           # 0-1
-
-# Portamento
-0:14:14 Porta Rate         # 0-127
-0:15:14 Porta Mode         # 0-66; includes the portamento bend settings
-0:16:14 Porta Match        # 0-1
-0:17:14 Porta Quantize     # 0-1
-0:18:14 Porta Legato       # 0-1
-
-# Mixer and filter - level switches differ from Page 2 on-level amounts
-0:19:14 Osc1 On            # 0-1
-0:20:14 Osc2 On            # 0-1
-0:21:14 Noise On           # 0-1
-0:22:14 Filter Cutoff      # 0-175
-0:23:14 Filter Resonance   # 0-127
-0:24:14 Filter Type        # 0-5 in base manual; OS2 added mode unverified
-0:25:14 Filter Key On      # 0-1
-0:26:14 Vintage            # 0-127
-
-# Main modulation LFO
-0:27:14 LFO1 Type          # 0-1
-0:28:14 LFO1 SH Input      # 0-1
-0:29:14 LFO1 Rate          # 0-127
-0:30:14 LFO1 Shape         # 0-4
-0:31:14 LFO1 Depth1        # 0-127
-0:32:14 LFO1 Depth2        # 0-127
-0:33:14 LFO1 Osc1 On       # 0-1
-0:34:14 LFO1 Osc2 On       # 0-1
-0:35:14 LFO1 Filter On     # 0-1
-0:36:14 LFO1 PWM1 On       # 0-1
-0:37:14 LFO1 PWM2 On       # 0-1
-0:38:14 LFO1 Volume On     # 0-1; OS2 Page 2 volume destination is not mapped
-0:39:14 LFO1 Trigger       # 0-1
-0:40:14 LFO1 Trig Phase    # 0-127
-0:41:14 LFO1 Key Track     # 0-1
-0:42:14 Mod1 Ramp Delay    # 0-127
-0:43:14 Mod1 Ramp Rise     # 0-127
-0:44:14 Mod1 Ramp Invert   # 0-1
-0:45:14 Mod1 Quantize      # 0-1
-0:46:14 Mod1 Osc1 Invert   # 0-1
-0:47:14 Mod2 Ramp Delay    # 0-127
-# NRPN48 omitted: NRPN table says 0-27, corresponding CC111 says 0-127.
-0:49:14 Mod2 Ramp Invert   # 0-1
-0:50:14 Mod2 Quantize      # 0-1
-0:51:14 Mod2 Osc1 Invert   # 0-1
-0:52:14 Mod2 LFO Speed     # 0-1
-0:53:14 LFO1 Voice Shift   # 0-2
-
-# Lever-box modulation LFO
-0:54:14 LFO2 Rate          # 0-127
-0:55:14 LFO2 Shape         # 0-5
-# NRPN56 omitted: manual labels both 56 and 57 as LFO2 destination OSC2.
-0:57:14 LFO2 Osc2 On       # 0-1
-0:58:14 LFO2 Depth         # 0-127
-
-# Envelopes and expression
-0:59:14 Filter Env Amt     # 0-127
-0:60:14 Filter Attack      # 0-255
-0:61:14 Amp Attack         # 0-255
-0:62:14 Filter Decay       # 0-255
-0:63:14 Amp Decay          # 0-255
-0:64:14 Filter Sustain     # 0-127
-0:65:14 Amp Sustain        # 0-127
-0:66:14 Filter Release     # 0-255
-0:67:14 Amp Release        # 0-255
-0:68:14 Filter Vel On      # 0-1
-0:69:14 Amp Vel On         # 0-1
-0:70:14 Touch Filter On    # 0-1
-0:71:14 Touch LFO On       # 0-1
-0:72:14 Lever Bend Amt     # 0-12
-0:73:14 Program Volume     # 0-127
-
-# Voice allocation and lever routing
-0:74:14 Unison On          # 0-1
-0:75:14 Unison Voices      # 0-7; raw encoding, not a direct voice count
-0:76:14 Unison Key Mode    # 0-5
-0:77:14 Lever Mode         # 0-1
-0:78:14 LFO2 Lower On      # 0-1
-0:79:14 LFO2 Upper On      # 0-1
-
-# Arpeggiator
-0:80:14 Arp On             # 0-1
-# NRPN81 omitted: published 0-27 conflicts with CC85 0-127; OS2 adds divisions.
-0:82:14 Arp Hold           # 0-2
-0:83:14 Arp Direction      # 0-3
-0:84:14 Arp Lower On       # 0-1
-0:85:14 Arp Upper On       # 0-1
-0:86:14 Arp Trans Count    # 0-5
-0:87:14 Arp Trans Note0    # 0-120
-0:88:14 Arp Trans Note1    # 0-120
-0:89:14 Arp Trans Note2    # 0-120
-0:90:14 Arp Trans Note3    # 0-120
-0:91:14 Arp Trans Note4    # 0-120
-
-# Remaining performance and Page 2 controls
-0:92:14 Bend Osc2 Only     # 0-1
-0:93:14 Pedal Release      # 0-255
-# NRPN94 omitted: published range is 0-1207, an unresolved manual error.
-0:95:14 Chord Hold Mode    # 0-1
-0:96:14 Envelope Type      # 0-2
-0:97:14 Osc1 On Level      # 0-127
-0:98:14 Osc2 On Level      # 0-127
-0:99:14 Noise On Level     # 0-127
-0:100:14 Pan Mode          # 0-4
-0:101:14 Pan Width         # 0-2
-# NRPN102-121 edit program-name characters and are intentionally omitted.
-0:122:14 Transpose         # 0-2
-0:123:14 Filter Key Amt    # 0-127
-# Split/Double-specific addresses and undocumented OS2 additions are omitted.
 [/NRPN]
 
-# Assign encoders do not constrain values to the instrument range.
-# NRPN Assign increments are reported too coarse for live control.
-# Use Automation event editing for exact values, or the separate CC file.
+# Ordinary CC destinations avoid the full 0-16383 NRPN Assign range.
+# Pad layout: brightness, bloom, fade-in, tails, vintage variation, motion.
+# For slow filter motion, route LFO1 Destination 1 to Filter on the OB-X8.
 [ASSIGN]
-1 NRPN:0:22:14    # Filter Cutoff 0-175
-2 NRPN:0:23:14    # Filter Resonance 0-127
-3 NRPN:0:59:14    # Filter Env Amt 0-127
-4 NRPN:0:29:14    # LFO1 Rate 0-127
-5 NRPN:0:60:14    # Filter Attack 0-255
-6 NRPN:0:66:14    # Filter Release 0-255
-7 NRPN:0:26:14    # Vintage 0-127
-8 CC:1           # Mod Lever 0-127
+1 CC:33
+2 CC:34
+3 CC:31
+4 CC:39
+5 CC:45
+6 CC:48
+7 CC:3
+8 CC:53
 [/ASSIGN]
 
-# Seventeen empty lanes; other named parameters can be added on Hapax.
-# No DEFAULT values: the file does not specify an initial sound/preset.
+# Eighteen lanes, including both envelopes and LFO depth.
+# Set interpolation OFF for the Sustain pedal lane on Hapax.
 [AUTOMATION]
-NRPN:0:22:14
-NRPN:0:23:14
-NRPN:0:59:14
-NRPN:0:60:14
-NRPN:0:62:14
-NRPN:0:64:14
-NRPN:0:66:14
-NRPN:0:61:14
-NRPN:0:63:14
-NRPN:0:65:14
-NRPN:0:67:14
-NRPN:0:29:14
-NRPN:0:26:14
+CC:33
+CC:34
+CC:31
+CC:39
+CC:40
+CC:41
+CC:42
+CC:45
+CC:46
+CC:47
+CC:48
+CC:51
+CC:53
+CC:3
 CC:1
 CC:64
 PB
@@ -215,17 +101,18 @@ AT
 [/AUTOMATION]
 
 [COMMENT]
-Oberheim OB-X8
-HapaxOS 3-22 target
-OB-X8 OS 2-0-0-1
-Hardware test pending
-Param Receive NRPN
+Oberheim OB-X8 CC
+Definition v0-2
+Pad performance layout
+Param Receive CC
 MIDI Control On
 MPE Off
 Set MIDI port and channel
-NRPN uses 14 bit data
-NRPN Assign is coarse
-Respect documented ranges
+Assign sends CC 0-127
+Set LFO routing on synth
+Cutoff and env endpoints
+need hardware checking
 No preset defaults
+Hardware test pending
 See repository README
 [/COMMENT]

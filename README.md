@@ -8,13 +8,13 @@ Researched **October 14, 2026** against **[HapaxOS 3.22](https://squarp.net/hapa
 
 | Instrument | Definition | Setup and coverage | Status |
 | --- | --- | --- | --- |
-| Oberheim OB-X8 | [NRPN](definitions/oberheim/OB-X8.txt), [CC performance](definitions/oberheim/OB-X8-CC.txt) | [OB-X8 guide](definitions/oberheim/README.md) | NRPN Assign coarse-step issue reported; CC alternative hardware test pending |
+| Oberheim OB-X8 | [OB-X8.txt](definitions/oberheim/OB-X8.txt) | [OB-X8 guide](definitions/oberheim/README.md) | CC performance layout; source-reviewed; static validation passes; hardware test pending |
 | Vermona DRM1 MkIV | [DRM1-MkIV.txt](definitions/vermona/DRM1-MkIV.txt) | [DRM1 MkIV guide](definitions/vermona/README.md) | Source-reviewed; static validation passes; hardware test pending |
 | Dreadbox Typhon | [Typhon.txt](definitions/dreadbox/Typhon.txt) | [Typhon guide](definitions/dreadbox/README.md) | Source-reviewed; static validation passes; hardware test pending |
 | Nord Drum 3P | [Global kit](definitions/nord/Nord-Drum-3P.txt), [individual voice](definitions/nord/Nord-Drum-3P-Individual.txt) | [Nord Drum 3P guide](definitions/nord/README.md) | Source-reviewed; static validation passes; hardware test pending |
 | Groove Synthesis 3rd Wave 24M Desktop | [CC controls](definitions/groove-synthesis/3rd-Wave-Desktop.txt), [NRPN parts 1-4](definitions/groove-synthesis/README.md#choose-a-definition) | [3rd Wave Desktop guide](definitions/groove-synthesis/README.md) | Source-reviewed; static validation passes; hardware test pending |
 
-The OB-X8 NRPN definition provides 99 named sound controls, seven performance CCs, eight encoder assignments, and 17 empty automation lanes. Direct NRPN Assign editing has a reported coarse-step usability problem. A separate 20-CC performance file uses ordinary 0-127 controller values; cutoff and envelope-time endpoint coverage remains unverified. Both target ordinary polyphonic MIDI operation on OB-X8 OS 2.0.0.1. The guide records setup differences, unresolved manual entries, and undocumented OS 2.0 extensions.
+The OB-X8 definition uses 21 named CCs, eight encoder assignments for pads and evolving textures, and 18 empty automation lanes. Revision 0.2.0 replaces the original NRPN setup after user testing confirmed unusable 64-unit Assign increments. Set the OB-X8 to receive CC parameters and load the new file on a fresh track. Cutoff and envelope-time endpoint coverage remains unverified; the guide distinguishes legal MIDI values from confirmed parameter ranges. The target is ordinary polyphonic MIDI operation on OB-X8 OS 2.0.0.1.
 
 The DRM1 MkIV definition provides ten factory-mapped drum articulations, including both open/closed hi-hat pairs. It uses the manufacturer's channel 10 mapping and note velocity for dynamics; the device does not accept MIDI sound-parameter control.
 
@@ -30,7 +30,7 @@ The 3rd Wave files target the **24M Desktop on OS 2.0d**: one current 100-CC map
 2. Copy it directly into the SD card's `HAPAX` directory, alongside the project directories. The repository's manufacturer directories are for organization; do not assume Hapax scans them recursively.
 3. Insert the card, select a track, then hold **2ND** and press that **track** button. Open **Instrument Definition** using a lower-right encoder and select the file.
 4. Set the track's MIDI output port and channel to match the synth. Routing is preserved with `NULL` unless the instrument guide specifies a factory mapping, such as the DRM1's channel 10. Always check the device guide.
-5. Apply the device settings in its guide. For the OB-X8, use **MIDI Param Receive = NRPN** for `OB-X8.txt`, or **CC** for `OB-X8-CC.txt`; both use **MIDI Control Enable = On** and **MPE = Off**.
+5. Apply the device settings in its guide. For the OB-X8, use **MIDI Param Receive = CC**, **MIDI Control Enable = On**, and **MPE = Off**.
 
 These loading steps follow [Squarp's track manual](https://squarp.net/hapax/manual/modetrack/). Start the first hardware check on a new, empty track and save the project after configuring it.
 
