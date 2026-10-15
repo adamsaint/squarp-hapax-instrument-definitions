@@ -1,5 +1,5 @@
 # Oberheim OB-X8 - conventional MIDI performance and NRPN sound controls
-# Definition revision 0.1.0 - researched 2026-10-14
+# Definition revision 0.1.1 - updated 2026-10-14
 # Target HapaxOS 3.22 and OB-X8 Main OS 2.0.0.1
 # Status: source-reviewed and statically checked; hardware verification pending.
 # Setup, exclusions and test procedure: definitions/oberheim/README.md
@@ -13,6 +13,8 @@
 # All NRPNs use 14-bit DATA encoding, including parameters whose range is 0-1.
 # Published parameter ranges below are comments, NOT Hapax range constraints.
 # The 2026 template has no MIN/MAX or enumerated-value syntax.
+# User reports unusably large NRPN Assign increments; see README.
+# OB-X8-CC.txt provides a separate CC performance setup for testing.
 # No explicit parameter defaults or program changes are configured.
 
 VERSION 1
@@ -177,7 +179,8 @@ MAXRATE 24
 [/NRPN]
 
 # Assign encoders do not constrain values to the instrument range.
-# Watch the numeric value; use Automation event editing for precise values.
+# NRPN Assign increments are reported too coarse for live control.
+# Use Automation event editing for exact values, or the separate CC file.
 [ASSIGN]
 1 NRPN:0:22:14    # Filter Cutoff 0-175
 2 NRPN:0:23:14    # Filter Resonance 0-127
@@ -221,6 +224,7 @@ MIDI Control On
 MPE Off
 Set MIDI port and channel
 NRPN uses 14 bit data
+NRPN Assign is coarse
 Respect documented ranges
 No preset defaults
 See repository README

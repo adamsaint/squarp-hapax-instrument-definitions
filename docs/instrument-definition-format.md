@@ -184,12 +184,15 @@ This is displayed information, unlike ignored `#` comments. Use short plain line
 
 - **No documented range or enum fields:** `MIN=`, `MAX=`, `RANGE=`, and `NAMED=` are not in the current grammar. Requested syntax in a forum is not implemented syntax. Raw values can exceed the synth's meaningful domain even when they fit the MIDI data width.
 - **UI row values are a workaround, not file metadata:** current firmware can set exact values for automation rows. Those settings and interpolation choices must be configured on Hapax; no corresponding definition commands are documented.
+- **Assign usability needs a separate check:** a valid 14-bit NRPN mapping can be impractical when the synth uses only a tiny part of 0-16383. Automation row values do not rescale Assign encoders, `DEFAULT=` does not set limits, and `MAXRATE` does not change knob steps. Where a synth also offers CC control, a separate CC setup can improve editing, but verify its receive mode and whether 0-127 reaches the full parameter range. Do not change NRPN data depth merely to shrink the UI range.
 - **Incoming NRPN recording is explicitly unsupported** in the current automation manual. A named output destination does not add a decoder for incoming parameter changes. Do not promise panel-knob recording, automatic patch synchronization, or bidirectional state feedback.
 - **Definitions cannot invent MIDI capabilities:** a note-triggered analog drum instrument may offer no remotely controllable sound parameters. Physical knobs alone are not evidence of CC/NRPN support.
 - **No documented arbitrary SysEx section:** firmware updates, preset dumps, and global configuration procedures are separate from definitions.
 - **No complete project or track preset:** there are no documented commands here for every MPE zone, scale, effect rack, default velocity, interpolation choice, program-change pre-send setting, or note pattern.
 
 Sources: [current template](https://squarp.net/hapax/instr_def/template.txt), [automation manual](https://squarp.net/hapax/manual/modeautomation/), and the firsthand [range feature request](https://squarp.community/t/feature-requested-a-min-max-range-for-cc-nrpn-assign/10597). The request also records practical coarse-step problems with small-domain 14-bit NRPNs. Its proposed range syntax remains absent from the current official template.
+
+The [modMatrix](https://squarp.net/hapax/manual/modefx/) offers CC sources, NRPN destinations, and attenuation. Treat this as a possible manually configured workaround, not a range feature supplied by a definition. Verify output endpoints, rounding, routing, and recording on hardware before presenting a concrete setup as working. The Filter effect's CC MIN/MAX filters controller numbers, not the values carried by each controller.
 
 ## Community review and tools
 
