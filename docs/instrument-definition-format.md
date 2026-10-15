@@ -67,6 +67,8 @@ Entry shape: `ROW:TRIG:CHAN:NOTENUMBER NAME`.
 
 The section is applied to DRUM tracks. `TRIG` and output note are separate fields: do not compress the four-field structure just because two fields are unused. The current template gives `TRIG`'s accepted range but little semantic explanation; preserve it with `NULL` unless the intended triggering behavior has been established. Old examples with eight rows are valid examples, not the current maximum. Source: [2026 template](https://squarp.net/hapax/instr_def/template.txt).
 
+Hapax exposes **16 drum slots**, even when a definition maps fewer instruments. Omitted rows retain their settings and names; default rows 9-16 are D1-D8. There is no documented definition command to hide/remove slots or set a smaller count. A label-only entry such as `11:NULL:NULL:NULL -` replaces a distracting default name while preserving routing. It does **not** disable the row. Source: [drum-track manual](https://squarp.net/hapax/manual/modestep/) and [template](https://squarp.net/hapax/instr_def/template.txt).
+
 ### Program names
 
 ```text
