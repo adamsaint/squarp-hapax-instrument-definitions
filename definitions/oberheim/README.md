@@ -2,18 +2,26 @@
 
 Use [OB-X8.txt](OB-X8.txt) for polyphonic sequencing and CC performance control on Hapax. **Revision 0.2.0 replaces the original NRPN definition** with eight knobs chosen for pads, sustained chords, and evolving textures. The separate CC filename has been retired.
 
-The target is HapaxOS 3.22 and **OB-X8 Main OS 2.0.0.1**, the latest versions listed by [Squarp](https://squarp.net/hapax/firmware/) and [Oberheim](https://oberheim.com/products/ob-x8/) when checked on October 14, 2026. The file is **source-reviewed and statically checked; hardware acceptance of this CC layout is pending**.
+The target is HapaxOS 3.22 and **OB-X8 Main OS 2.0.0.1**, the latest versions listed by [Squarp](https://squarp.net/hapax/firmware/) and [Oberheim](https://oberheim.com/products/ob-x8/) when checked on October 14, 2026. The file is **source-reviewed and statically checked**. The user reports CC controls working after loading onto a fresh track; full endpoint, recording, and persistence checks remain pending.
 
 ## Install and setup
 
 1. Download the raw [OB-X8.txt](OB-X8.txt) and replace `HAPAX/OB-X8.txt` on the SD card. If you copied the temporary `OB-X8-CC.txt` file, it can be removed to avoid duplicate choices.
-2. Load the definition on a **fresh POLY track**. Existing NRPN automation is not converted to CC by loading this file or changing the synth's receive mode.
+2. Load the definition on a **fresh, previously unused POLY track**, rather than selecting an empty pattern on the old track. Existing NRPN automation is not converted to CC by loading this file or changing the synth's receive mode. See the migration check below if the old Assign layout remains visible.
 3. Set Hapax's MIDI output port and channel to match the OB-X8. Routing fields are `NULL`, so the file preserves existing settings. Use Hapax's USB Host port for a direct USB synth connection, or the connected DIN output.
 4. Set **MIDI Param Receive = CC**, **MIDI Control Enable = On**, and **MPE = Off** on the OB-X8. Begin with a single program outside Split/Double mode.
 5. For output-only testing, set **MIDI Param Send = Off**. To record the OB-X8's panel movements later, set Send to CC and configure Hapax's input and recording. Send and Receive are independent settings.
 6. If the OB-X8 keyboard is routed through Hapax and returned to the synth, set **Local Control = Off** to avoid doubled notes. Choose the appropriate OB-X8 MIDI Out Cable when using that return path.
 
 These globals are documented in the [OB-X8 manual, printed pp. 17-18 and 112-120](https://oberheim.com/wp-content/uploads/2023/09/OB-X8-Manual-V2_2.pdf). Local Control guidance also appears in [Oberheim's troubleshooting guide](https://support.oberheim.com/hc/en-gb/articles/7067213876370-OB-X8-Troubleshooting-Guide).
+
+### Migration check: old Assign controls or unreadable comments
+
+On October 14, 2026, the user reported loading the CC file onto a track that previously used the NRPN definition. Assign still showed values such as 2688 and 3392, numeric parameter labels, and Mod Lever in slot 8; the definition comments were reportedly unreadable. Loading the same definition onto an unused track made the controls appear to work correctly. This isolates the observed problem to the existing-track migration path, but does not establish the underlying firmware cause or a general rule that reloading definitions always fails.
+
+Keep the old track intact and explicitly load `OB-X8.txt` through **2ND + track > Instrument Definition** on an unused POLY track. Restore the intended output port and channel. In **2ND + FILL**, the new layout has **LFO1 Depth1 / CC53 in slot 8**, and all eight controls use **0-127** values. The comment popup should begin with `Oberheim OB-X8 CC` and `Definition v0-2`; full comment-popup verification was not separately reported after the successful fresh-track load.
+
+Assignments belong to the track, so choosing another pattern on that same track does not provide an unused set of assignments. See [Squarp's Assign instructions](https://squarp.net/hapax/manual/). Replacing the SD file alone also does not update saved assignments; a [community report on definition reloads](https://squarp.community/t/instrument-definitions-force-to-reload-recharge/10393) describes the need to load updated files explicitly. No syntax or MIDI mapping change was required for the reported fresh-track success.
 
 ## Performance controls
 
@@ -83,7 +91,7 @@ This file does not configure MPE zones or per-note aftertouch. Hapax's AFTR/POLY
 
 ## Hardware acceptance test
 
-The CC checks remain **pending**. Static validation does not test Squarp's parser or the synth's response.
+**Basic CC Assign operation on a fresh track is user-reported as working.** The migration check above records the preceding failure on an existing NRPN track. The complete checks below, including full endpoint coverage, remain pending; the report does not establish that every controller, recording path, or save/reload case passed. Static validation alone does not test Squarp's parser or the synth's response.
 
 1. Record both displayed OS versions, connection type, channel, and definition revision. Load on a fresh track; confirm eight assignments, 18 lanes, and no parser warnings.
 2. Verify notes, note-offs, sustain, pitch bend, and pressure with suitable patch routing.
