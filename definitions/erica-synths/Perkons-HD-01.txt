@@ -1,0 +1,178 @@
+# Erica Synths Perkons HD-01 - single-channel drum kit
+# Definition revision 0.1.0 - researched 2026-10-15
+# Target HapaxOS 3.22 and Perkons HD-01 firmware 1.2.2.
+# Source-reviewed; hardware verification pending.
+# Official December 2024 manual, printed pages 31-36:
+# https://www.ericasynths.lv/service/file/download/product_id/1167/file_id/521/
+# Current firmware and downloads:
+# https://www.ericasynths.lv/perkons-hd-01-black-2520/
+# Trigger-note numbers corroborated by the community drum-lane example:
+# https://squarp.community/t/erica-synths-perkons/15818/2
+# Setup, ranges and caveats: definitions/erica-synths/Perkons-HD-01.md
+#
+# Use SINGLE MIDI CHANNEL mode and the published default CC map.
+# MULTI mode reuses CC70-80 on each voice channel; it needs a different setup.
+# Check SYSTEM/single-midi-cc.json if the synth's CC map has been customized.
+# All CC data is 0-127; switch thresholds are not published in the manual.
+# Switches are named but excluded from the initial Assign and automation lanes.
+# No explicit parameter defaults, program changes or NRPNs are configured.
+# Rows 1-4 are voices 1-4. Hapax retains 16 drum slots.
+# Spare rows send note 40, outside the documented C through D-sharp trigger map.
+# A spare row is not disabled; confirm silence on your unit before using it.
+
+VERSION 1
+TRACKNAME Perkons
+TYPE DRUM
+OUTPORT NULL
+OUTCHAN NULL
+INPORT NULL
+INCHAN NULL
+MAXRATE 24
+
+[DRUMLANES]
+1:NULL:NULL:36 Voice 1
+2:NULL:NULL:37 Voice 2
+3:NULL:NULL:38 Voice 3
+4:NULL:NULL:39 Voice 4
+# Dash labels reduce clutter. NULL preserves each lane's existing channel.
+5:NULL:NULL:40 -
+6:NULL:NULL:40 -
+7:NULL:NULL:40 -
+8:NULL:NULL:40 -
+9:NULL:NULL:40 -
+10:NULL:NULL:40 -
+11:NULL:NULL:40 -
+12:NULL:NULL:40 -
+13:NULL:NULL:40 -
+14:NULL:NULL:40 -
+15:NULL:NULL:40 -
+16:NULL:NULL:40 -
+[/DRUMLANES]
+
+[PC]
+[/PC]
+
+[CC]
+# Voice 1
+70 V1 Tune
+71 V1 Decay
+72 V1 Param1
+73 V1 Param2
+74 V1 Cutoff
+75 V1 Drive
+76 V1 FX Send
+77 V1 Level
+78 V1 Algorithm
+79 V1 Mode
+80 V1 Filter Mode
+
+# Voice 2
+81 V2 Tune
+82 V2 Decay
+83 V2 Param1
+84 V2 Param2
+85 V2 Cutoff
+86 V2 Drive
+87 V2 FX Send
+88 V2 Level
+89 V2 Algorithm
+90 V2 Mode
+91 V2 Filter Mode
+
+# Voice 3
+92 V3 Tune
+93 V3 Decay
+94 V3 Param1
+95 V3 Param2
+96 V3 Cutoff
+97 V3 Drive
+98 V3 FX Send
+99 V3 Level
+100 V3 Algorithm
+101 V3 Mode
+102 V3 Filter Mode
+
+# Voice 4
+103 V4 Tune
+104 V4 Decay
+105 V4 Param1
+106 V4 Param2
+107 V4 Cutoff
+108 V4 Drive
+109 V4 FX Send
+110 V4 Level
+111 V4 Algorithm
+112 V4 Mode
+113 V4 Filter Mode
+[/CC]
+
+[CC_PAIR]
+[/CC_PAIR]
+
+[NRPN]
+[/NRPN]
+
+# Top row: cutoff for voices 1-4. Bottom row: decay for voices 1-4.
+[ASSIGN]
+1 CC:74
+2 CC:85
+3 CC:96
+4 CC:107
+5 CC:71
+6 CC:82
+7 CC:93
+8 CC:104
+[/ASSIGN]
+
+# Eight continuous controls per voice; no selector automation is pre-created.
+[AUTOMATION]
+CC:70
+CC:71
+CC:72
+CC:73
+CC:74
+CC:75
+CC:76
+CC:77
+CC:81
+CC:82
+CC:83
+CC:84
+CC:85
+CC:86
+CC:87
+CC:88
+CC:92
+CC:93
+CC:94
+CC:95
+CC:96
+CC:97
+CC:98
+CC:99
+CC:103
+CC:104
+CC:105
+CC:106
+CC:107
+CC:108
+CC:109
+CC:110
+[/AUTOMATION]
+
+[COMMENT]
+Erica Synths Perkons HD-01
+Definition v0-1
+For firmware 1-2-2
+Single MIDI channel mode
+Default CC map required
+Set output port and channel
+Check all drum lane channels
+Voices 1-4 on rows 1-4
+Spare rows use note 40
+Top knobs are cutoff V1-V4
+Bottom knobs are decay V1-V4
+Keep internal sequence empty
+Hardware test pending
+See repository README
+[/COMMENT]

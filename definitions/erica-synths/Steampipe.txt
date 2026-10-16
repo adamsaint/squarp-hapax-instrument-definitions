@@ -1,0 +1,151 @@
+# Erica Synths Steampipe - project custom CC map
+# Definition revision 0.1.0 - researched 2026-10-15
+# Target HapaxOS 3.22 and Steampipe firmware 1.1.
+# Source-reviewed; hardware verification pending.
+# IMPORTANT: manually configure this custom map on the synth before use.
+# These CC numbers are project choices, not Erica's factory assignments.
+# Setup and the complete mapping worksheet:
+# definitions/erica-synths/Steampipe.md
+# Official manual V3, July 2025, PDF sheets 7-9 and 15-16:
+# https://www.ericasynths.lv/service/file/download/product_id/1434/file_id/566/
+# Current firmware and downloads:
+# https://www.ericasynths.lv/steampipe-3153/
+#
+# 32 continuous panel controls, eight Assign knobs, 32 empty automation lanes.
+# Use ordinary single-channel MIDI with MPE off and CC receive enabled.
+# Reserve CC20-31, CC40-53 and CC80-85 exclusively for the listed controls.
+# Remove conflicting assignments elsewhere in the synth's map and MIDI Device.
+# All entries are independent 7-bit CCs with raw values 0-127, not CC pairs.
+# Match destinations by panel function; menu wording can differ.
+# Reverb Spread is not the firmware 1.1 Voice Spread engine setting.
+# No guessed factory map, switch thresholds, LFO addresses or program changes.
+# No explicit defaults: the definition does not synchronize with patch values.
+
+VERSION 1
+TRACKNAME Steampipe
+TYPE POLY
+OUTPORT NULL
+OUTCHAN NULL
+INPORT NULL
+INCHAN NULL
+MAXRATE 24
+
+[DRUMLANES]
+[/DRUMLANES]
+
+[PC]
+[/PC]
+
+[CC]
+# Steam - envelope
+20 Env Attack
+21 Env Decay
+22 Env Sustain
+23 Env Release
+24 Env Keytrack
+25 Env Velocity
+
+# Steam - generator
+26 Gen DC Noise
+27 Gen Cutoff
+28 Gen Resonance
+29 Gen Keytrack
+30 Gen Env Amt
+31 Gen Gain
+
+# Pipe - feedback, saturation and patch level
+40 FB Push
+41 FB Decay
+42 FB Release
+43 Sat Soft Hard
+44 Sat Symmetry
+45 Patch Volume
+
+# Pipe - delay box, filters and voice
+46 Pipe Tune
+47 Pipe Fine
+48 Pipe Harmonics
+49 Pipe Splitpoint
+50 Pipe Highpass
+51 Pipe Lowpass
+52 Voice Drift
+53 Glide Time
+
+# Reverberator - these are not the Engine Voice Spread or master volume
+80 Reverb Spread
+81 Reverb Mix
+82 Reverb Bass
+83 Reverb Treble
+84 Reverb Size
+85 Reverb Spin
+[/CC]
+
+[CC_PAIR]
+[/CC_PAIR]
+
+[NRPN]
+[/NRPN]
+
+# Top: resonator tone. Bottom: envelope, feedback tail and reverb.
+[ASSIGN]
+1 CC:51
+2 CC:40
+3 CC:48
+4 CC:43
+5 CC:20
+6 CC:42
+7 CC:81
+8 CC:84
+[/ASSIGN]
+
+# Empty lanes for the complete custom map; no patch initialization values.
+[AUTOMATION]
+CC:20
+CC:21
+CC:22
+CC:23
+CC:24
+CC:25
+CC:26
+CC:27
+CC:28
+CC:29
+CC:30
+CC:31
+CC:40
+CC:41
+CC:42
+CC:43
+CC:44
+CC:45
+CC:46
+CC:47
+CC:48
+CC:49
+CC:50
+CC:51
+CC:52
+CC:53
+CC:80
+CC:81
+CC:82
+CC:83
+CC:84
+CC:85
+[/AUTOMATION]
+
+[COMMENT]
+Erica Synths Steampipe
+Definition v0-1
+Custom CC map - setup required
+For firmware 1-1
+Configure synth map first
+CC20-31 CC40-53 CC80-85
+See Steampipe setup guide
+Enable CC receive for input
+MPE off for this definition
+Set output port and channel
+32 continuous controls
+No patch value synchronization
+Hardware test pending
+[/COMMENT]

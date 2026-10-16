@@ -4,6 +4,8 @@ Documented instrument definitions for the [Squarp Hapax](https://squarp.net/hapa
 
 Researched **October 14, 2026** against **[HapaxOS 3.22](https://squarp.net/hapax/firmware/)**, released September 30, 2026, and Squarp's **[2026 definition template](https://squarp.net/hapax/instr_def/template.txt)**. The definition format still uses `VERSION 1`; this is independent of the firmware version.
 
+The Erica Synths definitions were researched **October 15, 2026**, with the same Hapax firmware and format rechecked on that date.
+
 ## Instruments
 
 | Instrument | Definition | Setup and coverage | Status |
@@ -13,6 +15,8 @@ Researched **October 14, 2026** against **[HapaxOS 3.22](https://squarp.net/hapa
 | Dreadbox Typhon | [Typhon.txt](definitions/dreadbox/Typhon.txt) | [Typhon guide](definitions/dreadbox/README.md) | Source-reviewed; static validation passes; hardware test pending |
 | Nord Drum 3P | [Global kit](definitions/nord/Nord-Drum-3P.txt), [individual voice](definitions/nord/Nord-Drum-3P-Individual.txt) | [Nord Drum 3P guide](definitions/nord/README.md) | Source-reviewed; static validation passes; hardware test pending |
 | Groove Synthesis 3rd Wave 24M Desktop | [CC controls](definitions/groove-synthesis/3rd-Wave-Desktop.txt), [NRPN parts 1-4](definitions/groove-synthesis/README.md#choose-a-definition) | [3rd Wave Desktop guide](definitions/groove-synthesis/README.md) | Source-reviewed; static validation passes; hardware test pending |
+| Erica Synths PĒRKONS HD-01 | [Perkons-HD-01.txt](definitions/erica-synths/Perkons-HD-01.txt) | [Single-channel setup guide](definitions/erica-synths/Perkons-HD-01.md) | Source-reviewed; static validation passes; hardware test pending |
+| Erica Synths Steampipe | [Steampipe.txt](definitions/erica-synths/Steampipe.txt) | [Custom CC map and setup](definitions/erica-synths/Steampipe.md) | Manual synth mapping required; static validation passes; hardware test pending |
 
 The OB-X8 definition uses 21 named CCs, eight encoder assignments for pads and evolving textures, and 18 empty automation lanes. Revision 0.2.0 replaces the original NRPN setup after user testing confirmed unusable 64-unit Assign increments. Set the OB-X8 to receive CC parameters and load the new file on a fresh track. Reloading resolved the reported Assign display issue, and the user subsequently reported working CC control after restarting both devices. The definition did not change during those recovery tests. Verification of every control, cutoff and envelope-time endpoints, recording, and persistence remains pending. The target is ordinary polyphonic MIDI operation on OB-X8 OS 2.0.0.1.
 
@@ -23,6 +27,10 @@ The Typhon definition targets firmware 4.2.1 and its current 98-controller map, 
 Nord Drum 3P has separate global-kit and individual-voice files for OS 1.24. The global file provides the six factory trigger notes and kit controls; the individual file supports independent voice automation or melodic sequencing. Both use the 14-bit Tone Pitch CC pair.
 
 The 3rd Wave files target the **24M Desktop on OS 2.0d**: one current 100-CC map and four NRPN part definitions with 279 named controls each. The Desktop's CC map differs from the keyboard's. Per-part NRPN operation requires the synth's new **MIDI include part in NRPN** setting; the guide covers routing, raw values, and unresolved manufacturer-table discrepancies.
+
+The PĒRKONS definition targets **HD-01 firmware 1.2.2** in **single-channel mode**, with four drum voices, 44 named CCs, eight Assign knobs and 32 empty automation lanes. Its active voices occupy rows 1-4, with dash-labeled spare rows. Multi-channel mode uses different CC routing.
+
+The Steampipe definition targets **firmware 1.1** with a **documented custom map** for 32 continuous controls, eight Assign knobs and 32 empty automation lanes. Enter the map on Steampipe before use; the Hapax file does not program the synth's assignments. A complete factory CC chart was not established from the official or community sources reviewed.
 
 ## Install
 
