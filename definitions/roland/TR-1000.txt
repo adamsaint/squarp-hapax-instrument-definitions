@@ -1,0 +1,203 @@
+# Roland TR-1000 - single-channel drum kit
+# Definition revision 0.1.0 - researched 2026-10-20
+# Target HapaxOS 3.22 and TR-1000 system program 1.22.
+# Source-reviewed and statically checked; hardware verification pending.
+# MIDI chart version 1.20, dated 2026-04-14, pages 1-2:
+# https://static.roland.com/assets/media/pdf/TR-1000_MIDIImpleChart_eng02_W.pdf
+# Reference manual version 1.20, printed pages 47-49:
+# https://static.roland.com/assets/media/pdf/TR-1000_reference_eng03_W.pdf
+# Firmware 1.21 and 1.22 report no specification changes:
+# https://www.roland.com/us/support/by_product/tr-1000/updates_drivers/1c5d302a-98c4-49b4-beb6-6d788f4b91fe/
+# Setup, complete map and caveats: definitions/roland/README.md
+#
+# Set MIDI Mode to Single Ch. and Pattern Ch. to 10 on the TR-1000.
+# Enable RX Note and Rx Edit Data. Check customized Inst Note settings.
+# Each Track Ch. uses different channels, notes and slice triggers.
+# Track CCs and all drum rows use channel 10. Set the connected output port.
+# If changing channel, update Pattern Ch., the track and every drum row.
+# CC values are raw 7-bit MIDI data, 0-127; display scaling is not specified.
+# CTRL assignments depend on the instrument or effect; keep generic labels.
+# No patch defaults, program favorites, CC pairs or NRPNs are configured.
+# Row 11 addresses TRIGGER OUT, not an audio voice.
+# Rows 12-16 send note 0, unused in the factory Single Ch. trigger map.
+# Spare rows are not disabled. Note 0 can trigger a slice in Each Track Ch.
+# Keep the internal pattern empty when Hapax sequences the drums.
+
+VERSION 1
+TRACKNAME TR-1000
+TYPE DRUM
+OUTPORT NULL
+OUTCHAN 10
+INPORT NULL
+INCHAN NULL
+MAXRATE 24
+
+# ROW:TRIG:CHAN:NOTENUMBER NAME
+[DRUMLANES]
+1:NULL:10:36 Kick
+2:NULL:10:38 Snare
+3:NULL:10:43 Low Tom
+4:NULL:10:50 High Tom
+5:NULL:10:37 Rim Shot
+6:NULL:10:39 Hand Clap
+7:NULL:10:42 Closed HH
+8:NULL:10:46 Open HH
+9:NULL:10:49 Crash
+10:NULL:10:51 Ride
+11:NULL:10:84 TRG Out
+# Dash labels reduce clutter; note 0 is not a MIDI disable command.
+12:NULL:10:0 -
+13:NULL:10:0 -
+14:NULL:10:0 -
+15:NULL:10:0 -
+16:NULL:10:0 -
+[/DRUMLANES]
+
+[PC]
+[/PC]
+
+[CC]
+# External input and global effects
+9 Ext In
+12 Delay Level
+13 Delay Time
+14 Delay Feedback
+15 Master FX On
+16 Master FX Ctrl1
+17 Master FX Ctrl2
+18 Master FX Ctrl3
+19 Analog FX On
+20 Filter
+21 Drive
+
+# Four layered tracks: BD, SD, LT, HT
+22 BD Tune
+23 BD Decay
+24 BD Mix
+25 BD Ctrl1
+26 BD Ctrl2
+27 BD Ctrl3
+28 BD Level
+29 SD Tune
+30 SD Decay
+31 SD Mix
+# The chart jumps from CC31 to CC46; do not fill the gap.
+46 SD Ctrl1
+47 SD Ctrl2
+48 SD Ctrl3
+49 SD Level
+50 LT Tune
+51 LT Decay
+52 LT Mix
+53 LT Ctrl1
+54 LT Ctrl2
+55 LT Ctrl3
+56 LT Level
+57 HT Tune
+58 HT Decay
+59 HT Mix
+60 HT Ctrl1
+61 HT Ctrl2
+62 HT Ctrl3
+63 HT Level
+
+# Rim shot and hand clap
+80 RS Tune
+81 RS Decay
+82 RS Ctrl
+83 RS Level
+84 HC Tune
+85 HC Decay
+86 HC Ctrl
+87 HC Level
+
+# Morph and reverb
+89 Morph
+90 Reverb Time
+91 Reverb Level
+
+# Closed hi-hat, open hi-hat, crash cymbal and ride cymbal
+# CC in a control label below means Crash Cymbal, not Control Change.
+102 CH Tune
+103 CH Decay
+104 CH Ctrl
+105 CH Level
+106 OH Tune
+107 OH Decay
+108 OH Ctrl
+109 OH Level
+110 CC Tune
+111 CC Decay
+112 CC Ctrl
+113 CC Level
+114 RC Tune
+115 RC Decay
+116 RC Ctrl
+117 RC Level
+[/CC]
+
+[CC_PAIR]
+[/CC_PAIR]
+
+[NRPN]
+[/NRPN]
+
+# Top row: kick tune/decay, snare tune/decay.
+# Bottom row: filter, drive, delay level, morph.
+[ASSIGN]
+1 CC:22
+2 CC:23
+3 CC:29
+4 CC:30
+5 CC:20
+6 CC:21
+7 CC:12
+8 CC:89
+[/ASSIGN]
+
+# Tune and Decay for ten voices, then four performance controls.
+# The remaining named CCs can be added as lanes manually.
+[AUTOMATION]
+CC:22
+CC:23
+CC:29
+CC:30
+CC:50
+CC:51
+CC:57
+CC:58
+CC:80
+CC:81
+CC:84
+CC:85
+CC:102
+CC:103
+CC:106
+CC:107
+CC:110
+CC:111
+CC:114
+CC:115
+CC:20
+CC:21
+CC:12
+CC:89
+[/AUTOMATION]
+
+[COMMENT]
+Roland TR-1000
+Definition v0-1
+For system program 1-22
+Single Ch mode required
+Pattern Ch 10
+RX Note and Rx Edit Data ON
+Check custom Inst Note settings
+Set the connected output port
+All drum rows use channel 10
+Rows 1-10 are drum voices
+Row 11 is TRG Out - not audio
+Spare rows 12-16 use note 0
+Keep internal pattern empty
+Hardware test pending
+See repository setup guide
+[/COMMENT]

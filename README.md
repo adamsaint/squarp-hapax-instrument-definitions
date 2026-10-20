@@ -6,6 +6,8 @@ Researched **October 14, 2026** against **[HapaxOS 3.22](https://squarp.net/hapa
 
 The Erica Synths definitions were researched **October 15, 2026**, with the same Hapax firmware and format rechecked on that date.
 
+The Roland TR-1000 definition was researched **October 20, 2026**, with the Hapax firmware and format rechecked on that date.
+
 ## Instruments
 
 | Instrument | Definition | Setup and coverage | Status |
@@ -17,6 +19,7 @@ The Erica Synths definitions were researched **October 15, 2026**, with the same
 | Groove Synthesis 3rd Wave 24M Desktop | [CC controls](definitions/groove-synthesis/3rd-Wave-Desktop.txt), [NRPN parts 1-4](definitions/groove-synthesis/README.md#choose-a-definition) | [3rd Wave Desktop guide](definitions/groove-synthesis/README.md) | Source-reviewed; static validation passes; hardware test pending |
 | Erica Synths PĒRKONS HD-01 | [Perkons-HD-01.txt](definitions/erica-synths/Perkons-HD-01.txt) | [Single-channel setup guide](definitions/erica-synths/Perkons-HD-01.md) | Source-reviewed; static validation passes; hardware test pending |
 | Erica Synths Steampipe | [Steampipe.txt](definitions/erica-synths/Steampipe.txt) | [Custom CC map and setup](definitions/erica-synths/Steampipe.md) | Manual synth mapping required; static validation passes; hardware test pending |
+| Roland TR-1000 | [TR-1000.txt](definitions/roland/TR-1000.txt) | [TR-1000 guide](definitions/roland/README.md) | Source-reviewed; static validation passes; hardware test pending |
 
 The OB-X8 definition uses 21 named CCs, eight encoder assignments for pads and evolving textures, and 18 empty automation lanes. Revision 0.2.0 replaces the original NRPN setup after user testing confirmed unusable 64-unit Assign increments. Set the OB-X8 to receive CC parameters and load the new file on a fresh track. Reloading resolved the reported Assign display issue, and the user subsequently reported working CC control after restarting both devices. The definition did not change during those recovery tests. Verification of every control, cutoff and envelope-time endpoints, recording, and persistence remains pending. The target is ordinary polyphonic MIDI operation on OB-X8 OS 2.0.0.1.
 
@@ -31,6 +34,8 @@ The 3rd Wave files target the **24M Desktop on OS 2.0d**: one current 100-CC map
 The PĒRKONS definition targets **HD-01 firmware 1.2.2** in **single-channel mode**, with four drum voices, 44 named CCs, eight Assign knobs and 32 empty automation lanes. Its active voices occupy rows 1-4, with dash-labeled spare rows. Multi-channel mode uses different CC routing.
 
 The Steampipe definition targets **firmware 1.1** with a **documented custom map** for 32 continuous controls, eight Assign knobs and 32 empty automation lanes. Enter the map on Steampipe before use; the Hapax file does not program the synth's assignments. A complete factory CC chart was not established from the official or community sources reviewed.
+
+The TR-1000 definition targets **system program 1.22** in **Single Ch. mode**, with ten drum voices and TRIGGER OUT on channel 10, 66 named CCs, eight Assign knobs and 24 empty automation lanes. Its guide covers customized notes, alternate/layer triggers, Pattern and Kit channels, and the different Each Track Ch. slice layout.
 
 ## Install
 
